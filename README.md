@@ -14,8 +14,8 @@
 <img src="https://img.shields.io/badge/python-3.7-7289DA.svg?style=for-the-badge" alt="Python 3.7" />
 </a>
 
-<a href="https://github.com/WebKide/modbot/blob/master/LICENSE">
-<img src="https://img.shields.io/badge/license-mit-7289DA.svg?style=for-the-badge" alt="MIT License" />
+<a href="https://github.com/kyb3r/modmail/">
+<img src="https://img.shields.io/github/forks/WebKide/modbot.svg?style=for-the-badge" alt="GitHub forks" />
 </a>
 </div>
 
