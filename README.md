@@ -1,6 +1,3 @@
-# modbot
-A supper laggy and buggy moderation Discord bot, to be hosted on Heroku, but legit af
-
 <div align="center">
 <p>
 <img src="https://i.imgur.com/N13YyuA.png" alt="modbot logo" />
