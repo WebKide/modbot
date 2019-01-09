@@ -23,17 +23,17 @@ A supper laggy and buggy moderation Discord bot, to be hosted on Heroku, but leg
 </div>
 
 ## Welcome
-This modbot uses discord.py rewrite, the next latest version of the library for Discord bots.
+This modbot uses discord.py rewrite, the latest version of the library for Discord bots.
 
 ## Installation
 
-Installation guides will be made available once the bot starts working on ALPHA and BETA before its official release!
+Installation guides will be made available once the bot starts working on ALPHA and BETA, before its official release!
 
 ## What is heroku?
 
 Heroku is a container based cloud platform that offers free plans to host web applications. 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/rewrite)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/master)
 
 ## Features
 
