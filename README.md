@@ -22,6 +22,12 @@
 ## Welcome
 This modbot uses discord.py rewrite, the latest version of the library for Discord bots.
 
+<div align="center">
+<a href="#">
+<img src="http://forthebadge.com/images/badges/built-with-love.svg?style=for-the-badge" alt="built with love" />
+</a>
+</div>
+
 ## Installation
 
 Installation guides will be made available once the bot starts working on ALPHA and BETA, before its official release!
@@ -33,6 +39,11 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/master)
 
 ## Features
+<div>
+<a href="#">
+<img src="http://forthebadge.com/images/badges/made-with-crayons.svg?style=for-the-badge" alt="made with crayons" />
+</a>
+</div>
 
 * Moderation commands
 * Security commands
@@ -41,13 +52,13 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 
 
 <div align="center">
-<p>Join our community for support, or to interact with the Devs and other great members</p>
+  <p><b>Join our community for support, or to interact with the Devs and other great members</b></p>
 <p><a href="https://discord.gg/2B4UvKx"><img src="https://discordapp.com/api/guilds/515071617815019520/widget.png?style=banner2" alt="Support server" /></a></p>
 </div>
 
 If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
 
-Note: **Do not ask** for anonymous mass DM command. Or any anonymous command!
+NOTE: **Do not ask** for anonymous mass DM command. Or any anonymous command!
 
 ## Acknowledgements 
 
