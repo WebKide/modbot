@@ -2,7 +2,7 @@
 <p>
 <img src="https://i.imgur.com/N13YyuA.png" alt="modbot logo" />
 </p>
-<p><i><b>Moderation bot for your Discord server! (ReWrite)</b></i></p>
+<p><i><b>a Moderation bot for your Discord server! 「ReWrite」</b></i></p>
 </div>
 
 <div align="center">
@@ -19,7 +19,7 @@
 </a>
 </div>
 
-## Welcome
+## .::: Welcome :::.
 This modbot uses discord.py rewrite, the latest version of the library for Discord bots.
 
 <div align="center">
@@ -28,17 +28,17 @@ This modbot uses discord.py rewrite, the latest version of the library for Disco
 </a>
 </div>
 
-## Installation
+## .::: Installation :::.
 
 Installation guides will be made available once the bot starts working on ALPHA and BETA, before its official release!
 
-## What is heroku?
+## .::: What is heroku? :::.
 
 Heroku is a container based cloud platform that offers free plans to host web applications. 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/master)
 
-## Features
+## .::: Features :::.
 <div>
 <a href="#">
 <img src="http://forthebadge.com/images/badges/made-with-crayons.svg?style=for-the-badge" alt="made with crayons" />
@@ -47,8 +47,21 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 
 * Moderation commands
 * Security commands
-* Webhooks command
+* Webhooks commands
+* Join autoroles
+* Self assignable roles
+* Welcome / farewell message
+* Channel monitor
+* Remind commands
+* Custom prefix / @modbot
+* Interactive commands
+* Set locale (translations)
 * Misc commands
++ Calc
++ Wiki
++ Urban
++ Search
++ mal
 
 
 <div align="center">
@@ -58,9 +71,11 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 
 If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
 
-NOTE: **Do not ask** for anonymous mass DM command. Or any anonymous command!
+NOTE: *Do not ask for Anonymous Mass DM command! Or any anonymous command!*
+=
+this ModBot is meant to help mods manage a server, to automate certain tasks that consume time, and most of all, ease the experience of everyone in the server
 
-## Acknowledgements 
+## .:: Acknowledgements ::.
 
 I'd personally like to thank the following Devs, without them this project could never be possibble
 
