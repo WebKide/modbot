@@ -30,20 +30,17 @@ import json
 
 from discord.ext import commands
 
-
-# watch = discord.Activity(type=2, name='this guild'))
-dev_list = [
-    323578534763298816,
-    180314310298304512,
-    325012556940836864
-]
-# for the time being, blacklist is here,
-# later has to be implemented in bot's db
+dev_list = [('WebKide', 323578534763298816),
+            ('Kybre', 325012556940836864),
+            ('4JR', 180314310298304512)]
+## for the time being, blacklist is here,
+## later has to be implemented in bot's db
 blacklisted_words = [
     'kms',
     'go die',
     'fuck off'
 ]
+
 
 class ModBot(commands.Bot):
     """
@@ -53,9 +50,9 @@ class ModBot(commands.Bot):
         '@everyone': '@\u200beveryone',
         '@here': '@\u200bhere'
     }
- 
+
     _mention_pattern = re.compile('|'.join(_mentions_transforms.keys()))
- 
+
     def __init__(self, **attrs):
         super().__init__(command_prefix=commands.when_mentioned_or(self.get_pre))
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
@@ -66,7 +63,6 @@ class ModBot(commands.Bot):
         self.add_command(self.reloadcog)
         self.add_command(self.unload)
         self.load_extensions()
-        
 
     def load_extensions(self, cogs=None, path='cogs.'):
         """ Load extensions from cogs folder """
@@ -83,21 +79,23 @@ class ModBot(commands.Bot):
         bot = bot()
         heroku_token = TOKEN or None
         if None:
-            print(e, '\n!-- Missing TOKEN in Heroku')
+            return print(e, '\n!-- Missing TOKEN in Heroku')
         else:
             try:
                 bot.run(heroku_token, reconnect=True)
             except Exception as e:
                 print(e, '\n!-- Missing TOKEN in Heroku')
 
+
     @staticmethod
     async def get_pre(bot, message):
-        """ Get the prefix from Heroku, 
+        """ Get the prefix from Heroku,
         default prefix is mention """
         try:
-          return os.environ.get('PREFIX') or 'modbot '
+            return os.environ.get('PREFIX') or 'modbot '
         except Exception as e:
             print(e, '\n!-- Missing PREFIX in Heroku')
+
 
     async def on_connect(self):
         """ If you see this in the logs, congrats """
@@ -105,56 +103,58 @@ class ModBot(commands.Bot):
               '|V| _  _||_  _ |_'
               '| |(_)(_||_)(_)|_'
               '\nmain.py loaded')
- 
+
+
     async def on_ready(self):
         """ If everything is fine, then... """
         print(textwrap.dedent(f"""
-        Your instance of ModBot
-        is ready to watch over
-        your Discord guild and
-        its active members!
+            Your instance of ModBot
+            is ready to watch over
+            your Discord guild and
+            its active members!
+            -------- (｡◝‿◜｡) --------
+            Logged in as: {self.user}
+            User ID: {self.user.id}
+            >+---------------------+<
+            """))
 
-        -------- (｡◝‿◜｡) --------
-        Logged in as: {self.user}
-        User ID: {self.user.id}
-        >+---------------------+<
-        """))
- 
         watch = discord.Activity(type=discord.ActivityType.watching, name='this guild')
-		await self.change_presence(activity=watch)
+        await self.change_presence(activity=watch)
+
 
     async def process_commands(self, message):
         """ Members might mention by mistake """
         if message is None:
             return
 
-    # Still have to work this out to: ignore correctly, 
-    # to listen for commands invoqued by assigned role, 
-    # and to delete messages that need to be purged 
-    # automatically, and to respond to available cmds
+    ## Still have to work this out to: ignore correctly,
+    ## to listen for commands invoqued by assigned role,
+    ## and to delete messages that need to be purged
+    ## automatically, and to respond to available cmds
+
     async def on_message(self, message):
         """ Guild messages monitoring system """
         if message.author.bot:
             return
 
-        # Needs more work for blacklist words per guild, role, and channel in db
+        ## Needs more work for blacklist words per guild, role, and channel in db
         if blacklisted_words in message.content:
             await message.delete()
- 
+
         if message.content.startswith('Lol'):
             await message.delete()
- 
-        if message.author.bot:
-            return
- 
+
     @commands.command()
     async def ping(self, ctx):
         """ Pong! """
         result = self.ws.latency * 1000:.4f
-        em = discord.Embed(color = 0x7289da)
-        em.title ='Pong! Websocket Latency:'
+        em = discord.Embed(color=0x7289da)
+        em.title = 'Pong! Websocket Latency:'
         em.description = f'{result} ms'
-        if ctx.author.id in dev_list:
+        x = ctx.message.author.id or message.author.id
+        if x not in (dev[1] for dev in dev_list):
+            return
+        if x in (dev[1] for dev in dev_list):
             try:
                 await ctx.send(embed=em)
             except discord.HTTPException:
@@ -165,4 +165,3 @@ class ModBot(commands.Bot):
 
 if __name__ == '__main__':
     ModBot.init()
-    
