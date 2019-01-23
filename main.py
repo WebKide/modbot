@@ -139,7 +139,7 @@ class ModBot(commands.Bot):
               f'  Logged in as: {self.user}\n'
               f'  ID: {self.user.id}\n'
               f'+-------------------------+\n'
-              f'|  BUILD IN PROGRESS 10%  |\n'
+              f' ██░░░░░░░░░░░░░░░░░░░░ 10%\n'
               f'+-------------------------+\n')
 
         await self.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, 
