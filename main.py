@@ -19,32 +19,31 @@ SOFTWARE.
 '''
 
 import discord
+import asyncio
+import aiohttp
+import datetime
+import time
+import json
+import sys
+import os
+import re
 import traceback
 import textwrap
-import aiohttp
-import asyncio
-import time
-import os
-import random
-import json
+## import psutil
 
 from discord.ext import commands
+from pathlib import Path
 
 dev_list = [('WebKide', 323578534763298816),
             ('Kybre', 325012556940836864),
-            ('4JR', 180314310298304512)]
-## for the time being, blacklist is here,
-## later has to be implemented in bot's db
-blacklisted_words = [
-    'kms',
-    'go die',
-    'fuck off'
+            ('4JR', 180314310298304512)
 ]
-
-
+# +------------------------------------------------------------+
+# |               ModBot has its own class!                    |
+# +------------------------------------------------------------+
 class ModBot(commands.Bot):
     """
-    a moderation bot for Discord guilds
+    a moderation bot for cool Discord guilds
     """
     _mentions_transforms = {
         '@everyone': '@\u200beveryone',
@@ -53,8 +52,12 @@ class ModBot(commands.Bot):
 
     _mention_pattern = re.compile('|'.join(_mentions_transforms.keys()))
 
+    # +------------------------------------------------------------+
+    # |             Here starts the actual bot                     |
+    # +------------------------------------------------------------+
     def __init__(self, **attrs):
-        super().__init__(command_prefix=commands.when_mentioned_or(self.get_pre))
+        super().__init__(command_prefix=None)
+        self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
         self.run(os.getenv('TOKEN').strip('\"'))
         self.add_command(self.ping)
@@ -64,104 +67,125 @@ class ModBot(commands.Bot):
         self.add_command(self.unload)
         self.load_extensions()
 
+    # +------------------------------------------------------------+
+    # |         Here we load the cogs onto the env                 |
+    # +------------------------------------------------------------+
     def load_extensions(self, cogs=None, path='cogs.'):
-        """ Load extensions from cogs folder """
+        """ Load extensions from ./cogs/ """
+        print('\n\n+----------▿▿▿▿▿----------+\n'
+              '|                         |\n'
+              '|   |V| _  _||_  _ |_ ™   |\n'
+              '|   | |(_)(_||_)(_)|_     |\n'
+              '|                         |\n'
+              '|          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    |\n'
+              '|                         |')
         for extension in cogs or self._extensions:
             try:
                 self.load_extension(f'{path}{extension}')
-                print(f'Loaded extension: {extension}')
+                print(f'|✧Loading extension: {extension} |')
             except Exception as e:
-                traceback.print_exc()
+                print(f'|✧ERROR loading file!     |\n'
+                      f'| {e}')
 
+    # +------------------------------------------------------------+
+    # |             Here we get the bot's TOKEN                    |
+    # +------------------------------------------------------------+
     @classmethod
     def init(bot):
         """ ModBot, get ready! """
         bot = bot()
         heroku_token = TOKEN or None
         if None:
-            return print(e, '\n!-- Missing TOKEN in Heroku')
+            return print(Exception, '!-- Missing TOKEN in Heroku')
         else:
             try:
                 bot.run(heroku_token, reconnect=True)
             except Exception as e:
                 print(e, '\n!-- Missing TOKEN in Heroku')
 
+    async def get_prefix(self, message):
+        return commands.when_mentioned_or('..', 'modbot ')(self, message)
 
-    @staticmethod
-    async def get_pre(bot, message):
-        """ Get the prefix from Heroku,
-        default prefix is mention """
-        try:
-            return os.environ.get('PREFIX') or 'modbot '
-        except Exception as e:
-            print(e, '\n!-- Missing PREFIX in Heroku')
-
-
+    # +------------------------------------------------------------+
+    # |     Here modbot loads cogs and shows errors, if any        |
+    # +------------------------------------------------------------+
     async def on_connect(self):
         """ If you see this in the logs, congrats """
-        print('>+---------------------+<\n\n'
-              '|V| _  _||_  _ |_'
-              '| |(_)(_||_)(_)|_'
-              '\nmain.py loaded')
+        print('|✧Loaded bot: main.py     |')
 
+        for ext in self.startup_ext:
+            try:
+                self.load_extension(f'cogs.{ext}')
+            except Exception as e:
+                print(f'|✧Failed to load: {ext}    |\n'
+                      f'| {e}')
+            else:
+                print(f'|✧Loaded extension: {ext}  |')
 
+    # +------------------------------------------------------------+
+    # |             If everything went well...                     |
+    # +------------------------------------------------------------+
     async def on_ready(self):
-        """ If everything is fine, then... """
-        print(textwrap.dedent(f"""
-            Your instance of ModBot
-            is ready to watch over
-            your Discord guild and
-            its active members!
-            -------- (｡◝‿◜｡) --------
-            Logged in as: {self.user}
-            User ID: {self.user.id}
-            >+---------------------+<
-            """))
+        """ Modbot is online! """
+        print(f'|                         |\n'
+              f'|  (∩｀-´)⊃━☆ﾟ.*･｡ﾟ~[ ♡ ] |\n'
+              f'|                         |\n'
+              f'| Your instance of ModBot |\n'
+              f'| is ready to watch over  |\n'
+              f'| your Discord guild and  |\n'
+              f'| its active members!     |\n'
+              f'|                         |\n'
+              f'+-------- (｡◝‿◜｡) --------+\n'
+              f'  Logged in as: {self.user}\n'
+              f'  ID: {self.user.id}\n'
+              f'+-------------------------+\n'
+              f'|  BUILD IN PROGRESS 10%  |\n'
+              f'+-------------------------+\n')
 
-        watch = discord.Activity(type=discord.ActivityType.watching, name='this guild')
-        await self.change_presence(activity=watch)
-
+        await self.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, 
+                                                             name='over you'))
 
     async def process_commands(self, message):
         """ Members might mention by mistake """
         if message is None:
             return
-
-    ## Still have to work this out to: ignore correctly,
-    ## to listen for commands invoqued by assigned role,
-    ## and to delete messages that need to be purged
-    ## automatically, and to respond to available cmds
-
+    # +------------------------------------------------------------+
+    # |   Still have to work this out to: ignore correctly,
+    # |   to listen for commands invoqued by assigned role,
+    # |   and to delete messages that need to be purged
+    # |   automatically, and to respond to available cmds
+    # +------------------------------------------------------------+
     async def on_message(self, message):
         """ Guild messages monitoring system """
         if message.author.bot:
             return
 
-        ## Needs more work for blacklist words per guild, role, and channel in db
-        if blacklisted_words in message.content:
-            await message.delete()
-
-        if message.content.startswith('Lol'):
-            await message.delete()
-
+    # +------------------------------------------------------------+
+    # |               Cliché commands                              |
+    # +------------------------------------------------------------+
     @commands.command()
     async def ping(self, ctx):
         """ Pong! """
-        result = self.ws.latency * 1000:.4f
-        em = discord.Embed(color=0x7289da)
-        em.title = 'Pong! Websocket Latency:'
-        em.description = f'{result} ms'
+        pong = f'{self.bot.ws.latency * 1000:.4f} ms'
+        e = discord.Embed(color=0x7289da)
+        e.title = 'Pong! Websocket Latency:'
+        e.description = pong
         x = ctx.message.author.id or message.author.id
         if x not in (dev[1] for dev in dev_list):
             return
         if x in (dev[1] for dev in dev_list):
             try:
-                await ctx.send(embed=em)
+                await ctx.send(embed=e)
             except discord.HTTPException:
-                await ctx.send('ᕙ(⇀‸↼‶)ᕗ ', result)
+                await ctx.send('ᕙ(⇀‸↼‶)ᕗ ', pong)
         else:
             return
 
+# +------------------------------------------------------------+
+# |       Dictionary of blacklisted words for test             |
+# +------------------------------------------------------------+
+blacklisted_words = ['nope', 'kms', 'go die', 'fuck off']
 
 if __name__ == '__main__':
     ModBot.init()
+
