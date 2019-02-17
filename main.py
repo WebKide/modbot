@@ -200,15 +200,15 @@ class ModBot(commands.Bot):
         #              Waking up message!
         # ==================================================
         txt = f"ᕙ(⇀‸↼‶)ᕗ I'm up madafaka! `{self.ws.latency * 1000:.2f}` ms"
-        if bot_channel is None:
-            gen = os.environ.get('CHAN')
+        if bot_channel is not None:
             try:
-                await self.get_channel(gen).send(txt)
+                await self.get_channel(bot_channel).send(txt)
             except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                 pass
         else:
+            gen_chan = os.environ.get('CHAN')
             try:
-                await self.get_channel(bot_channel).send(txt)
+                await self.get_channel(gen_chan).send(txt)
             except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                 pass
 
@@ -358,9 +358,13 @@ class ModBot(commands.Bot):
                         value=f'`{total_online}` online\n'
                               f'`{total_idle}` idle\n`{total_dnd}` dnd\n `{total_offline}` offline')
 
-            e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
-                        value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
-                              f'{tnx}')
+            try:
+			    e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
+                                   value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
+                                              f'{tnx}')
+			except Exception:
+			    e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
+                                   value=f'Processes: currently unavailable')
 
             return await ctx.send(embed=e)
 
