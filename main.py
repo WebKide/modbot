@@ -22,17 +22,14 @@ import discord
 import random
 import asyncio
 import datetime
-import aiohttp
 import traceback
 import os
 import re
-try:  # it works inside the venv but not on my other laptop... gotta fix this shit!
-    import psutil
-except ModuleNotFoundError:
-    pass
+import psutil
 
 from discord.ext import commands
 from pathlib import Path
+from aiohttp import Session
 
 __version__ = '0.05.0'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
@@ -72,7 +69,6 @@ class ModBot(commands.Bot):
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
         self.run(os.getenv('TOKEN').strip('\"'))
         self.version = __version__
-        # First load cmds within Modbot's class, then load plugins in /cogs/ folder
         self.add_command(self.ping)
         self.add_command(self.about)
         self.add_command(self.restart)  # hidden cmd
@@ -87,7 +83,8 @@ class ModBot(commands.Bot):
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
         self.process = psutil.Process()  # to monitor RAM and space
-        self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
+        self._session = None
+        # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
 
     # +------------------------------------------------------------+
     # |         Here we load the cogs onto the bot                 |
@@ -250,6 +247,12 @@ class ModBot(commands.Bot):
 
                     except discord.HTTPException:
                         pass
+
+    @property
+    def session(self):
+        if self._session is None:
+            self._session = ClientSession(loop=self.loop)
+        return self._session
 
     # +------------------------------------------------------------+
     # |               Cliché commands                              |
