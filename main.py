@@ -25,8 +25,8 @@ import datetime
 import traceback
 import os
 import re
-import psutil
 
+from psutil import Process
 from discord.ext import commands
 from pathlib import Path
 from aiohttp import ClientSession
@@ -81,7 +81,7 @@ class ModBot(commands.Bot):
         self.loop.create_task(self.periodic_presence_change())  # create presence-loop
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
-        self.process = psutil.Process()  # to monitor RAM and space
+        # self.process = psutil.Process()  # to monitor RAM and space
         self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
         # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
 
@@ -292,8 +292,8 @@ class ModBot(commands.Bot):
         total_unique = len(b.users)
 
         join_number = sorted(g.members, key=lambda m: m.joined_at).index(self.user) + 1
-        memory_usage = self.process.memory_full_info().uss / 1024 ** 2 or '0.0'
-        cpu_usage = f'{self.process.cpu_percent() / psutil.cpu_count():.2}%' or 'Unkwown'
+        # memory_usage = self.process.memory_full_info().uss / 1024 ** 2 or '0.0'
+        # cpu_usage = f'{self.process.cpu_percent() / psutil.cpu_count():.2}%' or 'Unkwown'
 
         voice_channels = []
         text_channels = []
@@ -354,13 +354,11 @@ class ModBot(commands.Bot):
                         value=f'`{total_online}` online\n'
                               f'`{total_idle}` idle\n`{total_dnd}` dnd\n `{total_offline}` offline')
 
-            try:
-                e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
-                                   value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
-                                              f'{tnx}')
-            except CommandInvokeError:
-                e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
-                                   value=f'Processes: currently unavailable')
+            # e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
+            #                      value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
+            #                                  f'{tnx}')
+			e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
+							   value=f'Processes: currently unavailable')
 
             return await ctx.send(embed=e)
 
