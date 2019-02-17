@@ -36,7 +36,7 @@ dev_list = [
     ('WebKide', 323578534763298816),
     ('Kybre', 325012556940836864)
 ]
-bot_channel = 375179500604096512  # log-errors in dev-server
+bot_channel = None  # log-errors in dev-server
 status_loop_channel = 545719518903926807  # status-loop channel in dev-server
 activity_list = ['you', 'this server', 'everything', 'new members', 'Anime', 'hentai', 'yo mama']
 __notes__ = "BETA version, official stable release. \n✔ commands are available to all " \
@@ -65,16 +65,16 @@ class ModBot(commands.Bot):
         self.ownerID = 323578534763298816
         super().__init__(command_prefix=commands.when_mentioned_or('botto ', '.', 'modbot '),
                          description=self.description, owner_id=self.ownerID, **attrs)
-        self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
-        self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
-        self.run(os.getenv('TOKEN').strip('\"'))
-        self.version = __version__
         self.add_command(self.ping)
         self.add_command(self.about)
         self.add_command(self.restart)  # hidden cmd
         self.add_command(self.load)
         self.add_command(self.reload)
         self.add_command(self.unload)
+        self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
+        self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
+        self.run(os.getenv('TOKEN').strip('\"'))
+        self.version = __version__
         self.add_command(self.prefix)  # hidden cmd
         self.add_command(self.avy)  # hidden cmd
         self.add_command(self.name)  # hidden cmd
@@ -83,7 +83,7 @@ class ModBot(commands.Bot):
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
         self.process = psutil.Process()  # to monitor RAM and space
-        self.session = None
+        self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
         # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
 
     # +------------------------------------------------------------+
@@ -190,11 +190,11 @@ class ModBot(commands.Bot):
               '│█████████████████░░░ 87% │\n'
               '└─────────────────────────┘\n')
 
-        status = "Portishead - Roaming [LIVE]"
+        status = "this server"
         await self.change_presence(status=discord.Status.online,
-                                   activity=discord.Activity(type=discord.ActivityType.listening,
+                                   activity=discord.Activity(type=discord.ActivityType.watching,
                                                              name=status))
-        msg = f'\N{HEADPHONE} `Status set to:` Listening to **{status}** | `after: {self.ws.latency * 1000:.2f} ms`'
+        msg = f'<:thonkingcool:540582184306606113> `Status set to:` Watching **{status}** | `{self.ws.latency * 1000:.2f} ms`'
         await self.get_channel(status_loop_channel).send(msg)
         # ==================================================
         #              Waking up message!
