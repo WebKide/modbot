@@ -304,7 +304,7 @@ class ModBot(commands.Bot):
         voice = len(voice_channels)
 
         now = datetime.datetime.utcnow()
-        delta = now - datetime.datetime.fromisoformat('2019-02-04 06:15:23.496541')  # DOB of v0.05.00 [BETA]
+        delta = now -  datetime.datetime(2018, 2, 4, 6, 15, 23, 79043)
         hours, remainder = divmod(int(delta.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
@@ -322,7 +322,7 @@ class ModBot(commands.Bot):
             f'**Protecting**: `{text}` text channels and `{voice}` voice channels in `{len(b.guilds)}` guild(s)\n' \
             f'**Serving**: a total of `{total_unique}` members of which `{total_online}` are actively online, ' \
             f'`{total_idle}` are chilling idly, `{total_dnd}` are busy, and `{total_offline}` are asleep\n' \
-            f'**Geek Stats**: `{memory_usage:.2f}` MiB | `{cpu_usage}` CPU | `{up_time}` online\n' \
+            f'**Geek Stats**: `memory_usage:.2f` MiB | `cpu_usage` CPU | `{up_time}` online\n' \
             f'◖|⌣ ‿ ⌣|◗˳♪⁎˚♫˳ Powered by `discord.py {discord.__version__} | Made with ❤`'
 
         try:
