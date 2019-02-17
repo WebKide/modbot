@@ -7,7 +7,7 @@ colorthief
 dhooks
 lxml
 parsedatetime
-PIL==4.3.0
+PIL
 Pillow
 psutil==5.3.1    # for geek stats
 pyfiglet==0.7.5    # calculator
