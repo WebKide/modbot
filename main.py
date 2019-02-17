@@ -121,10 +121,14 @@ class ModBot(commands.Bot):
         from_heroku = os.environ.get('LOG_CHAN_ID')
         return int(from_heroku) if from_heroku else LOG_CHAN_ID
     '''
-
     # +------------------------------------------------------------+
     # |             Here we get the bot's TOKEN                    |
     # +------------------------------------------------------------+
+    @property
+    def heroku_token(self):
+        """ Return Modbot's token from Heroku """
+        return os.environ.get('TOKEN') or None
+
     @classmethod
     def init(bot):
         """ ModBot, get ready! """
