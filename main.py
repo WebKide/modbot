@@ -29,7 +29,7 @@ import psutil
 
 from discord.ext import commands
 from pathlib import Path
-from aiohttp import Session
+from aiohttp import ClientSession
 
 __version__ = '0.05.0'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
