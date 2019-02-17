@@ -357,8 +357,7 @@ class ModBot(commands.Bot):
             # e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
             #                      value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
             #                                  f'{tnx}')
-			e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
-							   value=f'Processes: currently unavailable')
+            e.add_field(name='<:geekpengu:540582046486102027> Geek stats', value=f'Processes: currently unavailable')
 
             return await ctx.send(embed=e)
 
