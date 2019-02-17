@@ -36,7 +36,6 @@ dev_list = [
     ('WebKide', 323578534763298816),
     ('Kybre', 325012556940836864)
 ]
-bot_channel = None  # log-errors in dev-server
 status_loop_channel = 545719518903926807  # status-loop channel in dev-server
 activity_list = ['you', 'this server', 'everything', 'new members', 'Anime', 'hentai', 'yo mama']
 __notes__ = "BETA version, official stable release. \n✔ commands are available to all " \
@@ -187,7 +186,7 @@ class ModBot(commands.Bot):
               f'  Logged as: {self.user}\n'
               f'  Monitoring: {self.guild.name}\n'
               '├─────────────────────────┤\n'
-              '│█████████████████░░░ 87% │\n'
+              '│█████████████████░░░ 88% │\n'
               '└─────────────────────────┘\n')
 
         status = "this server"
@@ -201,7 +200,7 @@ class ModBot(commands.Bot):
         # ==================================================
         txt = f"ᕙ(⇀‸↼‶)ᕗ I'm up madafaka! `{self.ws.latency * 1000:.2f}` ms"
         try:
-            await self.get_channel(bot_channel).send(txt)
+            await self.get_channel(540600062217158666).send(txt)
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
             gen_chan = os.environ.get('CHAN')
             try:
@@ -417,7 +416,7 @@ class ModBot(commands.Bot):
                                     e.set_footer(text=f'{g.guild} | {g.guild.id}', icon_url=gav)
 
                                     await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-                                    await ctx.bot.get_channel(bot_channel).send(embed=e)
+                                    await ctx.bot.get_channel(540600062217158666).send(embed=e)
                                     return await ctx.send(embed=e)
 
                                 except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
