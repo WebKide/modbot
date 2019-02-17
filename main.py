@@ -130,7 +130,7 @@ class ModBot(commands.Bot):
         return os.environ.get('TOKEN') or None
 
     @classmethod
-    def init(self):
+    def init(bot):
         """ ModBot, get ready! """
         bot = bot()
         heroku_token = TOKEN or None
