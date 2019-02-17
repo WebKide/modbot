@@ -83,7 +83,7 @@ class ModBot(commands.Bot):
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
         self.process = psutil.Process()  # to monitor RAM and space
-        self._session = None
+        self.session = None
         # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
 
     # +------------------------------------------------------------+
@@ -250,9 +250,9 @@ class ModBot(commands.Bot):
 
     @property
     def session(self):
-        if self._session is None:
-            self._session = ClientSession(loop=self.loop)
-        return self._session
+        if self.session is None:
+            self.session = ClientSession(loop=self.loop)
+        return self.session
 
     # +------------------------------------------------------------+
     # |               Cliché commands                              |
