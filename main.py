@@ -326,7 +326,7 @@ class ModBot(commands.Bot):
             f'◖|⌣ ‿ ⌣|◗˳♪⁎˚♫˳ Powered by `discord.py {discord.__version__} | Made with ❤`'
 
         try:
-            e = discord.Embed(color=self.user_color)
+            e = discord.Embed(color=discord.Colour(0xed791d))
             e.url = 'http://discord.gg/HDJZnEj'
             e.set_author(name=f'{self.user} | {self.user.id}', icon_url=avy)
             e.set_footer(text=f'Powered by discord.py {discord.__version__} | Made with ❤')
@@ -406,7 +406,7 @@ class ModBot(commands.Bot):
                                         gav = 'https://cdn.discordapp.com/embed/avatars/0.png'
                                     g = ctx.message
                                     u = ctx.message.author
-                                    e = discord.Embed(color=self.user_color)
+                                    e = discord.Embed(color=discord.Colour(0xed791d))
                                     e.set_author(name=f'{u.name} | {u.display_name} | {u.id}')
                                     e.set_thumbnail(url=png_link)
                                     e.description = f'Successfully changed avatar (photo)[{png_link}]'
