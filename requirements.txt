@@ -1,5 +1,5 @@
-git+https://github.com/Rapptz/discord.py@rewrite    # egg=discord.py[voice]
-aiohttp==2.3.6    # to comply with discord.py
+git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
+aiohttp==2.3.6
 beautifulsoup4
 bs4
 chardet
@@ -8,8 +8,8 @@ dhooks
 lxml
 parsedatetime
 Pillow
-psutil==5.3.1    # for geek stats
-pyfiglet==0.7.5    # calculator
+psutil==5.3.1
+pyfiglet==0.7.5
 pyparsing==2.2.0
 requests==2.18.4
 sympy
