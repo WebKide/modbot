@@ -309,7 +309,7 @@ class ModBot(commands.Bot):
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
         weeks, days = divmod(days, 7)
-        fmt = '{h}h {m}:{s}m'
+        fmt = '{h}h:{m}m:{s}s'
         if days:
             fmt = '{d}d ' + fmt
         if weeks:
