@@ -308,10 +308,13 @@ class ModBot(commands.Bot):
         hours, remainder = divmod(int(delta.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
-        fmt = '{h}h {m}m {s}s'
+        weeks, days = divmod(days, 7)
+        fmt = '{h}h {m}:{s}m'
         if days:
             fmt = '{d}d ' + fmt
-        up_time = fmt.format(d=days, h=hours, m=minutes, s=seconds)
+        if weeks:
+            fmt = '{w}w ' + fmt
+        up_time = fmt.format(w=weeks, d=days, h=hours, m=minutes, s=seconds)
 
         d = f'```css\n|⌄| _  _||_  _ |_ ™\n| |(_)(_||_)(_)⎩_ v.{__version__}\n\n[Changelog]: {__notes__}```'
         tnx = '```bf\nThank you for using Modbot, please report any issues or request features in Github```'
