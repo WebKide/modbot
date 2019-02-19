@@ -283,7 +283,6 @@ class ModBot(commands.Bot):
         g = ctx.guild
         b = ctx.bot
         avy = 'https://cdn.discordapp.com/avatars/341645136981393409/a012ded302fa014b32302fed9724cde6.webp'
-        dod = 2019, 2, 4, 6, 15, 23, 79043
 
         # total_members = sum(1 for _ in b.get_all_members())
         total_online = len({m.id for m in b.get_all_members() if m.status is discord.Status.online})
@@ -305,7 +304,7 @@ class ModBot(commands.Bot):
         voice = len(voice_channels)
 
         now = datetime.datetime.utcnow()
-        delta = now -  datetime.datetime(dod)
+        delta = now -  datetime.datetime(2019, 2, 4, 6, 15, 23, 79043)
         hours, remainder = divmod(int(delta.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
