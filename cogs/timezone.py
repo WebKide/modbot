@@ -18,9 +18,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import datetime
 import traceback
 
+from datetime import datetime
 from pytz import timezone
 from discord.ext import commands
 
@@ -30,6 +30,10 @@ dev_list = [
 
 
 class TimeZone:
+    """
+    Timezone list of places
+    https://gist.github.com/mjrulesamrat/0c1f7de951d3c508fb3a20b4b0b33a98
+    """
     def __init__(self, bot):
         self.bot = bot
 
