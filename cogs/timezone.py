@@ -46,7 +46,8 @@ class TimeZone:
 
         if flag is not None:
             try:
-                place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
+                m_fl = ctx.message.content or message.content
+                place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
                             .replace(':flag_au:', 'Australia/Sydney')\
                             .replace(':flag_br:', 'America/Sao_Paulo')\
                             .replace(':flag_cn:', 'Asia/Shanghai')\
