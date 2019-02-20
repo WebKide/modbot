@@ -19,6 +19,7 @@ SOFTWARE.
 """
 
 import datetime
+import traceback
 
 from pytz import timezone
 from discord.ext import commands
@@ -41,8 +42,9 @@ class TimeZone:
 
         if flag is not None:
             mc = ctx.message.content or message.content
-            if flag.startswith(':') and flag.endswith(:):
-                place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires') \
+            try:
+                if flag.startswith(':') and flag.endswith(:):
+                    place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires') \
                             .replace(':flag_au:', 'Australia/Sydney') \
                             .replace(':flag_br:', 'America/Sao_Paulo') \
                             .replace(':flag_cn:', 'Asia/Shanghai') \
@@ -63,12 +65,15 @@ class TimeZone:
                             .replace(':flag_ro:', 'Europe/Bucharest') \
                             .replace(':flag_sg:', 'Asia/Singapore') \
                             .replace(':flag_za:', 'Africa/Johannesburg')
-                result = datetime.now(timezone(place)).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
-                await ctx.send(result)
+                    result = datetime.now(timezone(place)).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
+                    await ctx.send(result)
+            except Exception as e:
+                tb = traceback.format_exc()
+                await ctx.send(f'```py\n1.{e}\n!------------>\n{tb}```')
 
-            else:
-                msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} :flag_gb:`'
-                return await ctx.send(msg, delete_after=23)
+        else:
+            msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} :flag_gb:`'
+            return await ctx.send(msg, delete_after=23)
 
 
 def setup(bot):
