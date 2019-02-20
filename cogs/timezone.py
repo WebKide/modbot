@@ -34,7 +34,7 @@ class TimeZone:
 
     @commands.command(description='Command to show various timezones', aliases=['timezone'])
     @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def tz(self, ctx, *, flag: str = None):
+    async def tz(self, ctx, flag: str = None):
         """ Return the time for a particular timezone """
         if flag is None:
             return await ctx.send('include a flag for the timezone you want to know')
@@ -43,7 +43,7 @@ class TimeZone:
             if ':' not in flag:
                 return await ctx.send('the flag has to be in :flag_gb: format')
 
-            if ':' in flag:
+            if flag in ctx.message.content:
                 place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires') \
                             .replace(':flag_au:', 'Australia/Sydney') \
                             .replace(':flag_br:', 'America/Sao_Paulo') \
