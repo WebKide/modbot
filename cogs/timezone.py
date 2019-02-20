@@ -41,10 +41,7 @@ class TimeZone:
 
         if flag is not None:
             mc = ctx.message.content or message.content
-            if ':' not in mc:
-                return await ctx.send('the flag has to be in :flag_gb: format')
-
-            if flag in mc:
+            if flag.startswith(':') and flag.endswith(:):
                 place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires') \
                             .replace(':flag_au:', 'Australia/Sydney') \
                             .replace(':flag_br:', 'America/Sao_Paulo') \
