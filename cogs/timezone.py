@@ -56,8 +56,12 @@ class TimeZone:
                             .replace('🇪🇸', 'Europe/Madrid')\
                             .replace('🇫🇷', 'Europe/Paris')\
                             .replace('🇬🇧', 'Europe/London')\
+                            .replace('🇮🇳', 'Asia/Calcutta')\
                             .replace('🇮🇹', 'Europe/Rome')\
                             .replace('🇱🇰', 'Asia/Colombo')\
+                            .replace('🇮🇪', 'Europe/Dublin')\
+                            .replace('🇫🇮', 'Europe/Helsinki')\
+                            .replace('🇮🇱', 'Asia/Jerusalem')\
                             .replace('🇲🇽', 'America/Mexico_City')\
                             .replace('🇳🇵', 'Asia/Katmandu')\
                             .replace('🇳🇿', 'Pacific/Auckland')\
