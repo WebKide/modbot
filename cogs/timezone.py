@@ -48,26 +48,26 @@ class TimeZone:
             try:
                 m_fl = ctx.message.content or message.content
                 place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires')\
-                            .replace(':flag_au:', 'Australia/Sydney')\
-                            .replace(':flag_br:', 'America/Sao_Paulo')\
-                            .replace(':flag_cn:', 'Asia/Shanghai')\
-                            .replace(':flag_cr:', 'America/Costa_Rica')\
-                            .replace(':flag_de:', 'Europe/Berlin')\
-                            .replace(':flag_es:', 'Europe/Madrid')\
-                            .replace(':flag_fr:', 'Europe/Paris')\
-                            .replace(':flag_gb:', 'Europe/London')\
-                            .replace(':flag_it:', 'Europe/Rome')\
-                            .replace(':flag_lk:', 'Asia/Colombo')\
-                            .replace(':flag_mx:', 'America/Mexico_City')\
-                            .replace(':flag_np:', 'Asia/Katmandu')\
-                            .replace(':flag_nz:', 'Pacific/Auckland')\
-                            .replace(':flag_pa:', 'America/Panama')\
-                            .replace(':flag_pe:', 'America/Lima')\
-                            .replace(':flag_ph:', 'Asia/Manila')\
-                            .replace(':flag_pl:', 'Europe/Warsaw')\
-                            .replace(':flag_ro:', 'Europe/Bucharest')\
-                            .replace(':flag_sg:', 'Asia/Singapore')\
-                            .replace(':flag_za:', 'Africa/Johannesburg')
+                            .replace('🇦🇺', 'Australia/Sydney')\
+                            .replace('🇧🇷', 'America/Sao_Paulo')\
+                            .replace('🇨🇳', 'Asia/Shanghai')\
+                            .replace('🇨🇷', 'America/Costa_Rica')\
+                            .replace('🇩🇪', 'Europe/Berlin')\
+                            .replace('🇪🇸', 'Europe/Madrid')\
+                            .replace('🇫🇷', 'Europe/Paris')\
+                            .replace('🇬🇧', 'Europe/London')\
+                            .replace('🇮🇹', 'Europe/Rome')\
+                            .replace('🇱🇰', 'Asia/Colombo')\
+                            .replace('🇲🇽', 'America/Mexico_City')\
+                            .replace('🇳🇵', 'Asia/Katmandu')\
+                            .replace('🇳🇿', 'Pacific/Auckland')\
+                            .replace('🇵🇦', 'America/Panama')\
+                            .replace('🇵🇪', 'America/Lima')\
+                            .replace('🇵🇭', 'Asia/Manila')\
+                            .replace('🇵🇱', 'Europe/Warsaw')\
+                            .replace('🇷🇴', 'Europe/Bucharest')\
+                            .replace('🇸🇬', 'Asia/Singapore')\
+                            .replace('🇿🇦', 'Africa/Johannesburg')
                 result = datetime.now(timezone(place[4:])).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
                 await ctx.send(result)
 
