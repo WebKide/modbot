@@ -38,33 +38,45 @@ class TimeZone:
         self.bot = bot
 
     @commands.command(description='Command to get time across world', aliases=['timezone'])
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def tz(self, ctx, flag: str = None):
-        """ Return current time for a particular timezone """
+        """ ✔ Return current time for a particular timezone """
         if flag is None:
-            return await ctx.send('smh, include a flag for the timezone you want to know')
+            msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} :flag_gb:`'
+            return await ctx.send(msg, delete_after=23)
 
         if flag is not None:
             try:
-                m_fl = ctx.message.content or message.content
+                m_fl = ctx.message.content.lower() or message.content.lower()
                 place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires')\
+                            .replace('ar', 'America/Argentina/Buenos_Aires')\
                             .replace('🇦🇺', 'Australia/Sydney')\
+                            .replace('au', 'Australia/Sydney')\
                             .replace('🇧🇷', 'America/Sao_Paulo')\
                             .replace('🇨🇳', 'Asia/Shanghai')\
+                            .replace('cn', 'Asia/Shanghai')\
                             .replace('🇨🇷', 'America/Costa_Rica')\
+                            .replace('cr', 'America/Costa_Rica')\
                             .replace('🇩🇪', 'Europe/Berlin')\
                             .replace('🇪🇸', 'Europe/Madrid')\
+                            .replace('es', 'Europe/Madrid')\
                             .replace('🇫🇷', 'Europe/Paris')\
+                            .replace('fr', 'Europe/Paris')\
                             .replace('🇬🇧', 'Europe/London')\
+                            .replace('gb', 'Europe/London')\
+                            .replace('uk', 'Europe/London')\
                             .replace('🇮🇳', 'Asia/Calcutta')\
+                            .replace('in', 'Asia/Calcutta')\
                             .replace('🇮🇹', 'Europe/Rome')\
+                            .replace('it', 'Europe/Rome')\
                             .replace('🇱🇰', 'Asia/Colombo')\
                             .replace('🇮🇪', 'Europe/Dublin')\
                             .replace('🇫🇮', 'Europe/Helsinki')\
+                            .replace('fi', 'Europe/Helsinki')\
                             .replace('🇮🇱', 'Asia/Jerusalem')\
                             .replace('🇲🇽', 'America/Mexico_City')\
                             .replace('🇳🇵', 'Asia/Katmandu')\
                             .replace('🇳🇿', 'Pacific/Auckland')\
+                            .replace('nz', 'Pacific/Auckland')\
                             .replace('🇵🇦', 'America/Panama')\
                             .replace('🇵🇪', 'America/Lima')\
                             .replace('🇵🇭', 'Asia/Manila')\
@@ -76,12 +88,12 @@ class TimeZone:
                 await ctx.send(result)
 
             except Exception as e:
-                tb = traceback.format_exc()
-                await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
+                if ctx.author.id in (dev[1] for dev in dev_list):
+                    tb = traceback.format_exc()
+                    await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
 
-        else:
-            msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} :flag_gb:`'
-            return await ctx.send(msg, delete_after=23)
+                else:
+                    pass
 
 
 def setup(bot):
