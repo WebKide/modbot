@@ -84,7 +84,8 @@ class TimeZone:
                             .replace('🇷🇴', 'Europe/Bucharest')\
                             .replace('🇸🇬', 'Asia/Singapore')\
                             .replace('🇿🇦', 'Africa/Johannesburg')
-                result = datetime.now(timezone(place.split()[1:])).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
+                converted = place.split(' ')
+                result = datetime.now(timezone(converted[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
                 await ctx.send(result)
 
             except Exception as e:
