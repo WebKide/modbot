@@ -41,32 +41,31 @@ class TimeZone:
             return await ctx.send('smh, include a flag for the timezone you want to know')
 
         if flag is not None:
-            mc = ctx.message.content or message.content
             try:
-                if flag.startswith(':') and flag.endswith(':'):
-                    place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires') \
-                                .replace(':flag_au:', 'Australia/Sydney') \
-                                .replace(':flag_br:', 'America/Sao_Paulo') \
-                                .replace(':flag_cn:', 'Asia/Shanghai') \
-                                .replace(':flag_cr:', 'America/Costa_Rica') \
-                                .replace(':flag_de:', 'Europe/Berlin') \
-                                .replace(':flag_es:', 'Europe/Madrid') \
-                                .replace(':flag_fr:', 'Europe/Paris') \
-                                .replace(':flag_gb:', 'Europe/London') \
-                                .replace(':flag_it:', 'Europe/Rome') \
-                                .replace(':flag_lk:', 'Asia/Colombo') \
-                                .replace(':flag_mx:', 'America/Mexico_City') \
-                                .replace(':flag_np:', 'Asia/Katmandu') \
-                                .replace(':flag_nz:', 'Pacific/Auckland') \
-                                .replace(':flag_pa:', 'America/Panama') \
-                                .replace(':flag_pe:', 'America/Lima') \
-                                .replace(':flag_ph:', 'Asia/Manila') \
-                                .replace(':flag_pl:', 'Europe/Warsaw') \
-                                .replace(':flag_ro:', 'Europe/Bucharest') \
-                                .replace(':flag_sg:', 'Asia/Singapore') \
-                                .replace(':flag_za:', 'Africa/Johannesburg')
-                    result = datetime.now(timezone(place)).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
-                    await ctx.send(result)
+                place = flag.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
+                            .replace(':flag_au:', 'Australia/Sydney')\
+                            .replace(':flag_br:', 'America/Sao_Paulo')\
+                            .replace(':flag_cn:', 'Asia/Shanghai')\
+                            .replace(':flag_cr:', 'America/Costa_Rica')\
+                            .replace(':flag_de:', 'Europe/Berlin')\
+                            .replace(':flag_es:', 'Europe/Madrid')\
+                            .replace(':flag_fr:', 'Europe/Paris')\
+                            .replace(':flag_gb:', 'Europe/London')\
+                            .replace(':flag_it:', 'Europe/Rome')\
+                            .replace(':flag_lk:', 'Asia/Colombo')\
+                            .replace(':flag_mx:', 'America/Mexico_City')\
+                            .replace(':flag_np:', 'Asia/Katmandu')\
+                            .replace(':flag_nz:', 'Pacific/Auckland')\
+                            .replace(':flag_pa:', 'America/Panama')\
+                            .replace(':flag_pe:', 'America/Lima')\
+                            .replace(':flag_ph:', 'Asia/Manila')\
+                            .replace(':flag_pl:', 'Europe/Warsaw')\
+                            .replace(':flag_ro:', 'Europe/Bucharest')\
+                            .replace(':flag_sg:', 'Asia/Singapore')\
+                            .replace(':flag_za:', 'Africa/Johannesburg')
+                result = datetime.now(timezone(place)).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
+                await ctx.send(result)
+
             except Exception as e:
                 tb = traceback.format_exc()
                 await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
