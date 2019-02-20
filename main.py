@@ -348,7 +348,7 @@ class ModBot(commands.Bot):
 
             e.add_field(name='<:4stars:540582116090445825> Current Guild',
                         value=f'Position: `{join_number}`\nName: {g.name}\nDoB: {str(g.created_at)[:-16]}\n'
-                              f'Owner: {g.owner.display_name}\nPrefix: `{ctx.prefix}` OR `@{self.user.display_name}`')
+                              f'Owner: {g.owner.display_name}\nPrefix: `botto ` OR `@{self.user.display_name}`')
 
             e.add_field(name='\N{BUSTS IN SILHOUETTE} Members',
                         value=f'`{total_online}` online\n'
