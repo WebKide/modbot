@@ -121,7 +121,6 @@ class Calculator:
         self.mod_color = discord.Colour(0x7289da) ## blurple
 
     @commands.command(description='Scientific calculator', aliases=['calculate', 'maths'])
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def calc(self, ctx, *, formula = None):
         """ ✔ Do some math
         thanks to Paul McGuire's fourFn.py. """
