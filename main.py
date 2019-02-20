@@ -265,7 +265,7 @@ class ModBot(commands.Bot):
         if x not in (dev[1] for dev in dev_list):
             return
 
-        if x in (dev[1] for dev in dev_list):
+        else:
             try:
                 await ctx.message.add_reaction('\N{TABLE TENNIS PADDLE AND BALL}')
                 await ctx.send(embed=e)
@@ -273,9 +273,6 @@ class ModBot(commands.Bot):
             except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                 await ctx.channel.trigger_typing()
                 await ctx.send(pong)
-
-        else:
-            return
 
     @commands.command(description='Modbot, a bot developed by WebKide', aliases=['bot', 'botto', 'info', 'invite'])
     async def about(self, ctx):
@@ -371,6 +368,7 @@ class ModBot(commands.Bot):
     # |               Developer commands!                          |
     # +------------------------------------------------------------+
     @commands.command(description='Command for bot developer', no_pm=True)
+    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def avy(self, ctx, *, png_link: str = None):
         """
         ✯ Change Modbot's avatar
@@ -436,6 +434,7 @@ class ModBot(commands.Bot):
             return
 
     @commands.command(description='Command for bot developer', no_pm=True)
+    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def name(self, ctx, text: str = None):
         """
         ✯ Change Modbot's name
@@ -478,6 +477,7 @@ class ModBot(commands.Bot):
             return
 
     @commands.command(description='Command for bot owner', hidden=True, no_pm=True)
+    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def prefix(self, ctx, *, prefix: str = None):
         """ ✯ Change prefix temporarily """
         if ctx.author.id not in (dev[1] for dev in dev_list):
@@ -629,14 +629,12 @@ class ModBot(commands.Bot):
             if str is not None:
                 await ctx.channel.trigger_typing()
                 try:
+                    self.unload_extension(cog)
                     await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
 
                 except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                     msg = f'Plugin **cogs/{cog}.py** unloaded'
                     await ctx.send(msg, delete_after=9)
-
-                finally:
-                    self.unload_extension(cog)
 
 
 if __name__ == '__main__':
