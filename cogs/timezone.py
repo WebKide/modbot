@@ -47,7 +47,7 @@ class TimeZone:
         if flag is not None:
             try:
                 m_fl = ctx.message.content or message.content
-                place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires')\
+                place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
                             .replace(':flag_au:', 'Australia/Sydney')\
                             .replace(':flag_br:', 'America/Sao_Paulo')\
                             .replace(':flag_cn:', 'Asia/Shanghai')\
@@ -68,7 +68,7 @@ class TimeZone:
                             .replace(':flag_ro:', 'Europe/Bucharest')\
                             .replace(':flag_sg:', 'Asia/Singapore')\
                             .replace(':flag_za:', 'Africa/Johannesburg')
-                result = datetime.now(timezone(place)).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
+                result = datetime.now(timezone(place[4:])).strftime(f'{flag} %a %d %b, **%H:**%M:%S')
                 await ctx.send(result)
 
             except Exception as e:
