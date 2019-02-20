@@ -30,11 +30,11 @@ This modbot uses discord.py rewrite, the latest version of the library for Disco
 
 ## .::: Installation :::.
 
-Installation guides will be made available once the bot starts working on ALPHA and BETA, before its official release!
+Installation guide WIP [work in progress]!
 
 ## .::: What is heroku? :::.
 
-Heroku is a container based cloud platform that offers free plans to host web applications. 
+Heroku is a container based cloud platform that offers free plans to host web applications. Currently in development to fascilitate installation of Modbot. 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/master)
 
@@ -44,6 +44,8 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 <img src="http://forthebadge.com/images/badges/made-with-crayons.svg?style=for-the-badge" alt="made with crayons" />
 </a>
 </div>
+
+As the features become live, they will be marked with a ✔ sign next to them: 
 
 * Moderation commands
 * Security commands
@@ -57,7 +59,8 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 * Interactive commands
 * Set locale (translations)
 * Misc commands
-+ Calc
+* <b>✔ Eval</b>
++ <b>✔ Calc</b>
 + Wiki
 + Urban
 + Search
@@ -73,7 +76,7 @@ If you want to request features or commands, [create an issue](https://github.co
 
 NOTE: *Do not ask for Anonymous Mass DM command! Or any anonymous command!*
 =
-this ModBot is meant to help mods manage a server, to automate certain tasks that consume time, and most of all, ease the experience of everyone in the server
+this ModBot is meant to help mods manage a server, to automate certain tasks that consume time, and most of all, ease the experience of everyone in the server. However, there has to be a trail of actions so that Mods don't abuse their power. 
 
 ## .:: Acknowledgements ::.
 
@@ -84,3 +87,8 @@ I'd personally like to thank the following Devs, without them this project could
 > Gitcog by [4JR](https://github.com/fourjr/)
 
 > Discord webhooks by [kyb3r](https://github.com/kyb3r/dhooks/)
+
+> EmbedToBox by [kwugfighter](https://github.com/kwugfighter)
+
+> fourFn.py by [Paul McGuire](http://pyparsing.wikispaces.com/file/view/fourFn.py)
+
