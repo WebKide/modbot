@@ -47,48 +47,45 @@ class TimeZone:
         if flag is not None:
             try:
                 m_fl = ctx.message.content.lower() or message.content.lower()
-                place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires')\
-                            .replace('ar', 'America/Argentina/Buenos_Aires')\
-                            .replace('🇦🇺', 'Australia/Sydney')\
-                            .replace('au', 'Australia/Sydney')\
-                            .replace('🇧🇷', 'America/Sao_Paulo')\
-                            .replace('🇨🇳', 'Asia/Shanghai')\
-                            .replace('cn', 'Asia/Shanghai')\
-                            .replace('🇨🇷', 'America/Costa_Rica')\
-                            .replace('cr', 'America/Costa_Rica')\
-                            .replace('🇩🇪', 'Europe/Berlin')\
-                            .replace('🇪🇸', 'Europe/Madrid')\
-                            .replace('es', 'Europe/Madrid')\
-                            .replace('🇫🇷', 'Europe/Paris')\
-                            .replace('fr', 'Europe/Paris')\
-                            .replace('🇬🇧', 'Europe/London')\
-                            .replace('gb', 'Europe/London')\
-                            .replace('uk', 'Europe/London')\
-                            .replace('🇮🇳', 'Asia/Calcutta')\
-                            .replace('in', 'Asia/Calcutta')\
-                            .replace('🇮🇹', 'Europe/Rome')\
-                            .replace('it', 'Europe/Rome')\
-                            .replace('🇱🇰', 'Asia/Colombo')\
-                            .replace('🇮🇪', 'Europe/Dublin')\
-                            .replace('🇫🇮', 'Europe/Helsinki')\
-                            .replace('fi', 'Europe/Helsinki')\
-                            .replace('🇮🇱', 'Asia/Jerusalem')\
-                            .replace('🇲🇽', 'America/Mexico_City')\
-                            .replace('🇳🇵', 'Asia/Katmandu')\
-                            .replace('🇳🇿', 'Pacific/Auckland')\
-                            .replace('nz', 'Pacific/Auckland')\
-                            .replace('🇵🇦', 'America/Panama')\
-                            .replace('🇵🇪', 'America/Lima')\
-                            .replace('🇵🇭', 'Asia/Manila')\
-                            .replace('🇵🇱', 'Europe/Warsaw')\
-                            .replace('🇷🇴', 'Europe/Bucharest')\
-                            .replace('🇸🇬', 'Asia/Singapore')\
-                            .replace('🇿🇦', 'Africa/Johannesburg')
-                converted = place.split(' ')
-                # result = datetime.now(timezone(converted[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
-                result = datetime.now(timezone(str(converted[1:]).replace('[', '').replace(']', '')\
-                                                                 .replace('\'', '').replace(' ', '')))\
-                                                                 .strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
+                if m_fl is not str:
+                    place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
+                                .replace(':flag_au:', 'Australia/Sydney')\
+                                .replace(':flag_br:', 'America/Sao_Paulo')\
+                                .replace(':flag_cn:', 'Asia/Shanghai')\
+                                .replace(':flag_in:', 'Asia/Calcutta')\
+                                .replace(':flag_it:', 'Europe/Rome')\
+                                .replace(':flag_lk:', 'Asia/Colombo')\
+                                .replace(':flag_ie:', 'Europe/Dublin')\
+                                .replace(':flag_il:', 'Asia/Jerusalem')\
+                                .replace(':flag_mx:', 'America/Mexico_City')\
+                                .replace(':flag_np:', 'Asia/Katmandu')\
+                                .replace(':flag_nz:', 'Pacific/Auckland')\
+                                .replace(':flag_pa:', 'America/Panama')\
+                                .replace(':flag_pe:', 'America/Lima')\
+                                .replace(':flag_ph:', 'Asia/Manila')\
+                                .replace(':flag_za:', 'Africa/Johannesburg')
+                    partial = place.split()
+                    converted = str(partial[1:]).strip('[').strip(']').strip('\'').strip(' ')
+                    result = datetime.now(timezone(converted)).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
+                else:
+                    place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
+                                .replace(':flag_au:', 'Australia/Sydney')\
+                                .replace(':flag_br:', 'America/Sao_Paulo')\
+                                .replace(':flag_cn:', 'Asia/Shanghai')\
+                                .replace(':flag_in:', 'Asia/Calcutta')\
+                                .replace(':flag_it:', 'Europe/Rome')\
+                                .replace(':flag_lk:', 'Asia/Colombo')\
+                                .replace(':flag_ie:', 'Europe/Dublin')\
+                                .replace(':flag_il:', 'Asia/Jerusalem')\
+                                .replace(':flag_mx:', 'America/Mexico_City')\
+                                .replace(':flag_np:', 'Asia/Katmandu')\
+                                .replace(':flag_nz:', 'Pacific/Auckland')\
+                                .replace(':flag_pa:', 'America/Panama')\
+                                .replace(':flag_pe:', 'America/Lima')\
+                                .replace(':flag_ph:', 'Asia/Manila')\
+                                .replace(':flag_za:', 'Africa/Johannesburg')
+                    result = 'working on country initials as argument'  # datetime.now(timezone(place[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
+
                 await ctx.send(result)
 
             except Exception as e:
