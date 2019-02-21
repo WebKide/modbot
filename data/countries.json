@@ -129,7 +129,7 @@
     {"Asia/Qatar" : ["QA", "Qatar", "Doha", ":flag_qa:"]},
     {"Europe/Bucharest" : ["RO", "Romania", "Bucharest", ":flag_ro:"]},
     {"Europe/Moscow" : ["RU", "Russia", ":flag_ru:"]},
-    {"Europe/Volgograd",  : "RU", "Russia", ":flag_ru:"]},
+    {"Europe/Volgograd"  : ["RU", "Russia", ":flag_ru:"]},
     {"Asia/Yekaterinburg" : ["RU", "Russia", ":flag_ru:"]},
     {"Asia/Novosibirsk" : ["RU", "Russia", ":flag_ru:"]},
     {"Asia/Krasnoyarsk" : ["RU", "Russia", "Moscow", ":flag_ru:"]},
