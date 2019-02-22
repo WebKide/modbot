@@ -19,6 +19,8 @@ SOFTWARE.
 """
 
 import traceback
+import discord
+import asyncio
 
 from datetime import datetime
 from pytz import timezone
@@ -47,6 +49,7 @@ class TimeZone:
         if flag is not None:
             try:
                 m_fl = ctx.message.content.lower() or message.content.lower()
+
                 if m_fl is not str:
                     place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
                                 .replace(':flag_au:', 'Australia/Sydney')\
@@ -64,29 +67,33 @@ class TimeZone:
                                 .replace(':flag_pe:', 'America/Lima')\
                                 .replace(':flag_ph:', 'Asia/Manila')\
                                 .replace(':flag_za:', 'Africa/Johannesburg')
-                    partial = place.split()
-                    converted = str(partial[1:]).strip('[').strip(']').strip('\'').strip(' ')
-                    result = datetime.now(timezone(converted)).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
-                else:
-                    place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
-                                .replace(':flag_au:', 'Australia/Sydney')\
-                                .replace(':flag_br:', 'America/Sao_Paulo')\
-                                .replace(':flag_cn:', 'Asia/Shanghai')\
-                                .replace(':flag_in:', 'Asia/Calcutta')\
-                                .replace(':flag_it:', 'Europe/Rome')\
-                                .replace(':flag_lk:', 'Asia/Colombo')\
-                                .replace(':flag_ie:', 'Europe/Dublin')\
-                                .replace(':flag_il:', 'Asia/Jerusalem')\
-                                .replace(':flag_mx:', 'America/Mexico_City')\
-                                .replace(':flag_np:', 'Asia/Katmandu')\
-                                .replace(':flag_nz:', 'Pacific/Auckland')\
-                                .replace(':flag_pa:', 'America/Panama')\
-                                .replace(':flag_pe:', 'America/Lima')\
-                                .replace(':flag_ph:', 'Asia/Manila')\
-                                .replace(':flag_za:', 'Africa/Johannesburg')
-                    result = 'working on country initials as argument'  # datetime.now(timezone(place[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
+                    k = place.split()
+                    zone_c = str(k[1:]).strip('[').strip(']').strip('\'').strip(' ')
+                    title_c = zone_c.replace('/', ', ')
 
-                await ctx.send(result)
+                    z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_1 = discord.Embed(title=f'{flag} {title_c}', description=z_1, color=0xed791d)
+                    s = await ctx.send(embed=e_1)
+                    await asyncio.sleep(3)
+
+                    z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_2 = discord.Embed(title=f'{flag} {title_c}', description=z_2, color=0xed791d)
+                    await s.edit(embed=e_2)
+                    await asyncio.sleep(5)
+
+                    z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_3 = discord.Embed(title=f'{flag} {title_c}', description=z_3, color=0xed791d)
+                    await s.edit(embed=e_3)
+                    await asyncio.sleep(9)
+
+                    z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_4 = discord.Embed(title=f'{flag} {title_c}', description=z_4, color=0xed791d)
+                    await s.edit(embed=e_4)
+
+                else:
+                    result = 'working on country initials as argument'
+                    # datetime.now(timezone(place[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
+                    await ctx.send(result)
 
             except Exception as e:
                 if ctx.author.id in (dev[1] for dev in dev_list):
@@ -95,6 +102,9 @@ class TimeZone:
 
                 else:
                     pass
+
+        else:
+            pass
 
 
 def setup(bot):
