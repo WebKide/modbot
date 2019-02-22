@@ -51,44 +51,72 @@ class TimeZone:
                 m_fl = ctx.message.content.lower() or message.content.lower()
 
                 if m_fl is not str:
-                    place = m_fl.replace(':flag_ar:', 'America/Argentina/Buenos_Aires')\
-                                .replace(':flag_au:', 'Australia/Sydney')\
-                                .replace(':flag_br:', 'America/Sao_Paulo')\
-                                .replace(':flag_cn:', 'Asia/Shanghai')\
-                                .replace(':flag_in:', 'Asia/Calcutta')\
-                                .replace(':flag_it:', 'Europe/Rome')\
-                                .replace(':flag_lk:', 'Asia/Colombo')\
-                                .replace(':flag_ie:', 'Europe/Dublin')\
-                                .replace(':flag_il:', 'Asia/Jerusalem')\
-                                .replace(':flag_mx:', 'America/Mexico_City')\
-                                .replace(':flag_np:', 'Asia/Katmandu')\
-                                .replace(':flag_nz:', 'Pacific/Auckland')\
-                                .replace(':flag_pa:', 'America/Panama')\
-                                .replace(':flag_pe:', 'America/Lima')\
-                                .replace(':flag_ph:', 'Asia/Manila')\
-                                .replace(':flag_za:', 'Africa/Johannesburg')
+
+                    place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires') \
+                                .replace('🇦🇺', 'Australia/Sydney') \
+                                .replace('🇧🇷', 'America/Sao_Paulo') \
+                                .replace('🇨🇳', 'Asia/Shanghai') \
+                                .replace('🇨🇷', 'America/Costa_Rica') \
+                                .replace('cr', 'America/Costa_Rica') \
+                                .replace('🇩🇪', 'Europe/Berlin') \
+                                .replace('🇪🇸', 'Europe/Madrid') \
+                                .replace('es', 'Europe/Madrid') \
+                                .replace('🇫🇷', 'Europe/Paris') \
+                                .replace('fr', 'Europe/Paris') \
+                                .replace('🇬🇧', 'Europe/London') \
+                                .replace('gb', 'Europe/London') \
+                                .replace('uk', 'Europe/London') \
+                                .replace('🇮🇳', 'Asia/Calcutta') \
+                                .replace('in', 'Asia/Calcutta') \
+                                .replace('🇮🇹', 'Europe/Rome') \
+                                .replace('it', 'Europe/Rome') \
+                                .replace('🇱🇰', 'Asia/Colombo') \
+                                .replace('🇮🇪', 'Europe/Dublin') \
+                                .replace('🇫🇮', 'Europe/Helsinki') \
+                                .replace('fi', 'Europe/Helsinki') \
+                                .replace('🇮🇱', 'Asia/Jerusalem') \
+                                .replace('🇲🇽', 'America/Mexico_City') \
+                                .replace('🇳🇵', 'Asia/Katmandu') \
+                                .replace('🇳🇿', 'Pacific/Auckland') \
+                                .replace('nz', 'Pacific/Auckland') \
+                                .replace('🇵🇦', 'America/Panama') \
+                                .replace('🇵🇪', 'America/Lima') \
+                                .replace('🇵🇭', 'Asia/Manila') \
+                                .replace('🇵🇱', 'Europe/Warsaw') \
+                                .replace('🇷🇴', 'Europe/Bucharest') \
+                                .replace('🇸🇬', 'Asia/Singapore') \
+                                .replace('🇿🇦', 'Africa/Johannesburg')
                     k = place.split()
                     zone_c = str(k[1:]).strip('[').strip(']').strip('\'').strip(' ')
                     title_c = zone_c.replace('/', ', ')
 
                     z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_1 = discord.Embed(title=f'{flag} {title_c}', description=z_1, color=0xed791d)
+                    e_1 = discord.Embed(title=f'{flag} | {title_c}', description=z_1, color=0x7289da)
                     s = await ctx.send(embed=e_1)
-                    await asyncio.sleep(3)
+
+                    await asyncio.sleep(2)
 
                     z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_2 = discord.Embed(title=f'{flag} {title_c}', description=z_2, color=0xed791d)
+                    e_2 = discord.Embed(title=f'{flag} | {title_c}', description=z_2, color=0xed791d)
                     await s.edit(embed=e_2)
-                    await asyncio.sleep(5)
+
+                    await asyncio.sleep(3)
 
                     z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_3 = discord.Embed(title=f'{flag} {title_c}', description=z_3, color=0xed791d)
+                    e_3 = discord.Embed(title=f'{flag} | {title_c}', description=z_3, color=0x7289da)
                     await s.edit(embed=e_3)
-                    await asyncio.sleep(9)
+
+                    await asyncio.sleep(5)
 
                     z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_4 = discord.Embed(title=f'{flag} {title_c}', description=z_4, color=0xed791d)
+                    e_4 = discord.Embed(title=f'{flag} | {title_c}', description=z_4, color=0xed791d)
                     await s.edit(embed=e_4)
+
+                    await asyncio.sleep(10)
+
+                    z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_5 = discord.Embed(title=f'{flag} | {title_c}', description=z_5, color=0x7289da)
+                    await s.edit(embed=e_5)
 
                 else:
                     result = 'working on country initials as argument'
