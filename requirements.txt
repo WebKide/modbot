@@ -1,4 +1,4 @@
-git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
+git+https://github.com/Rapptz/discord.py@7f4c57dd5ad20b7fa10aea485f674a4bc24b9547
 aiohttp==2.3.6
 beautifulsoup4
 bs4
@@ -8,7 +8,7 @@ dhooks
 lxml
 parsedatetime
 Pillow
-psutil==5.3.1
+psutil<5.3.2
 pyfiglet==0.7.5
 pyparsing==2.2.0
 pytz
