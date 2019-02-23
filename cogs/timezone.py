@@ -39,19 +39,25 @@ class TimeZone:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description='Command to get time across world', aliases=['timezone'])
-    async def tz(self, ctx, flag: str = None):
-        """ ✔ Return current time for a particular timezone """
-        if flag is None:
-            msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} :flag_gb:`'
-            return await ctx.send(msg, delete_after=23)
+    @commands.command(description='Command to get time across world', aliases=['timezone', 'c'])
+    async def tz(self, ctx, *, flag_country: str = None):
+        """ ✔ Return current time for a particular timezone
 
-        if flag is not None:
-            try:
-                m_fl = ctx.message.content.lower() or message.content.lower()
-
-                if m_fl is not str:
-
+        Use <tz> [:flag_country_gb: / :flag_country_it:] or available name:
+        
+        Argentina, Australia, Brasil, China,
+        India, Ireland, Israel, Italy,
+        Mexico, Nepal, New Zealand, Panama,
+        Peru, Philippines, Sri Lanka, 
+        GMT, PST, MST, CST, EST, HST, IST
+        """
+        countries = ['argentina', 'australia', 'brasil', 'china', 'india', 'ireland', 'israel', 'italy',
+                     'mexico', 'nepal', 'new zealand', 'panama', 'peru', 'philippines', 'sri lanka',
+                     'ist', 'gmt', 'england', 'london', 'est', 'hst', 'pst', 'mst', 'cst']
+        if flag_country is not None:
+            if any(x not in ctx.message.content.lower() for x in countries):
+                try:
+                    m_fl = ctx.message.content.lower()
                     place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires') \
                                 .replace('🇦🇺', 'Australia/Sydney') \
                                 .replace('🇧🇷', 'America/Sao_Paulo') \
@@ -86,53 +92,98 @@ class TimeZone:
                                 .replace('🇷🇴', 'Europe/Bucharest') \
                                 .replace('🇸🇬', 'Asia/Singapore') \
                                 .replace('🇿🇦', 'Africa/Johannesburg')
-                    k = place.split()
+                    k = place.split('tz ')
                     zone_c = str(k[1:]).strip('[').strip(']').strip('\'').strip(' ')
                     title_c = zone_c.replace('/', ', ')
-
                     z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_1 = discord.Embed(title=f'{flag} | {title_c}', description=z_1, color=0x7289da)
+                    e_1 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_1, color=0x7289da)
                     s = await ctx.send(embed=e_1)
-
                     await asyncio.sleep(2)
-
                     z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_2 = discord.Embed(title=f'{flag} | {title_c}', description=z_2, color=0xed791d)
+                    e_2 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_2, color=0xed791d)
                     await s.edit(embed=e_2)
-
                     await asyncio.sleep(3)
-
                     z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_3 = discord.Embed(title=f'{flag} | {title_c}', description=z_3, color=0x7289da)
+                    e_3 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_3, color=0x7289da)
                     await s.edit(embed=e_3)
-
                     await asyncio.sleep(5)
-
                     z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_4 = discord.Embed(title=f'{flag} | {title_c}', description=z_4, color=0xed791d)
+                    e_4 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_4, color=0xed791d)
                     await s.edit(embed=e_4)
-
-                    await asyncio.sleep(10)
-
+                    await asyncio.sleep(9)
                     z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                    e_5 = discord.Embed(title=f'{flag} | {title_c}', description=z_5, color=0x7289da)
-                    await s.edit(embed=e_5)
+                    e_5 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_5, color=0x7289da)
+                    return await s.edit(embed=e_5)
 
-                else:
-                    result = 'working on country initials as argument'
-                    # datetime.now(timezone(place[1:])).strftime(f'{flag} | %a %d %b, **%H:**%M:%S')
-                    await ctx.send(result)
+                except Exception as e:
+                    if ctx.author.id in (dev[1] for dev in dev_list):
+                        if ctx.message.guild.id == 540072370527010841:
+                            tb = traceback.format_exc()
+                            return await ctx.send(f'```py\n[2] {e}\n!------------>\n{tb}```')
+                    else:
+                        pass
 
-            except Exception as e:
-                if ctx.author.id in (dev[1] for dev in dev_list):
-                    tb = traceback.format_exc()
-                    await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
+            if any(x in ctx.message.content.lower() for x in countries):
+                try:
+                    flag_country = flag_country.lower()
+                    place = flag_country.replace('argentina', 'America/Argentina/Buenos_Aires') \
+                                        .replace('australia', 'Australia/Sydney') \
+                                        .replace('brasil', 'America/Sao_Paulo') \
+                                        .replace('china', 'Asia/Shanghai') \
+                                        .replace('india', 'Asia/Calcutta') \
+                                        .replace('ist', 'Asia/Calcutta') \
+                                        .replace('sri lanka', 'Asia/Colombo') \
+                                        .replace('ireland', 'Europe/Dublin') \
+                                        .replace('israel', 'Asia/Jerusalem') \
+                                        .replace('gmt', 'Europe/London')\
+                                        .replace('england', 'Europe/London')\
+                                        .replace('london', 'Europe/London') \
+                                        .replace('nepal', 'Asia/Katmandu') \
+                                        .replace('new zealand', 'Pacific/Auckland') \
+                                        .replace('panama', 'America/Panama') \
+                                        .replace('est', 'America/New_York') \
+                                        .replace('hst', 'Pacific/Honolulu') \
+                                        .replace('pst', 'America/Los_Angeles') \
+                                        .replace('mst', 'America/Denver') \
+                                        .replace('cst', 'America/Chicago') \
+                                        .replace('peru', 'America/Lima') \
+                                        .replace('philippines', 'Asia/Manila')
+                    k = place.split()
+                    zone_c = str(k).strip('[').strip(']').strip('\'').strip(' ')
+                    title_c = zone_c.replace('/', ', ')
+                    z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_1 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_1, color=0x7289da)
+                    s = await ctx.send(embed=e_1)
+                    await asyncio.sleep(2)
+                    z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_2 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_2, color=0xed791d)
+                    await s.edit(embed=e_2)
+                    await asyncio.sleep(3)
+                    z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_3 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_3, color=0x7289da)
+                    await s.edit(embed=e_3)
+                    await asyncio.sleep(5)
+                    z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_4 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_4, color=0xed791d)
+                    await s.edit(embed=e_4)
+                    await asyncio.sleep(9)
+                    z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
+                    e_5 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_5, color=0x7289da)
+                    return await s.edit(embed=e_5)
 
-                else:
-                    pass
+                except Exception as e:
+                    if ctx.author.id in (dev[1] for dev in dev_list):
+                        if ctx.message.guild.id == 540072370527010841:
+                            tb = traceback.format_exc()
+                            return await ctx.send(f'```py\n[1] {e}\n!------------>\n{tb}```')
+                    else:
+                        pass
 
-        else:
-            pass
+        if flag_country is None:
+            msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} [:flag_gb: / country]`\n\n' \
+                f'**Available:** argentina, australia, brasil, china, india, ireland, israel, italy, ' \
+                f'mexico, nepal, new zealand, panama, peru, philippines, sri lanka'
+            return await ctx.send(msg, delete_after=23)
 
 
 def setup(bot):
