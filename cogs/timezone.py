@@ -39,8 +39,8 @@ class TimeZone:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description='Command to get time across world', aliases=['timezone', 'c'])
-    async def tz(self, ctx, flag_country: str = None):
+    @commands.command(description='Command to get time across the world', aliases=['timezone'])
+    async def tz(self, ctx, *, flag_country: str = None):
         """ ✔ Return current time for a particular timezone
 
         Use <tz> [:flag_country_gb: / :flag_country_it:] or available name:
@@ -51,18 +51,18 @@ class TimeZone:
         Peru, Philippines, Sri Lanka,
         GMT, PST, MST, CST, EST, HST, IST
         """
+        countries = ['argentina', 'australia', 'brazil', 'china', 'india', 'ireland', 'israel', 'italy',
+                     'mexico', 'nepal', 'new zealand', 'panama', 'peru', 'philippines', 'sri lanka',
+                     'ist', 'gmt', 'england', 'london', 'est', 'hst', 'pst', 'mst', 'cst']
         m = ctx.message
 
         if flag_country is None:
             msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} [:flag_gb: / country]`\n\n' \
-                  f'**Available:** Argentina, Australia, Brasil, China, India, Ireland, Israel, Italy, ' \
+                  f'**Available countries:** Argentina, Australia, Brasil, China, India, Ireland, Israel, Italy, ' \
                   f'Mexico, Nepal, New Zealand, Panama, Peru, Philippines, Sri Lanka'
             return await ctx.send(msg, delete_after=23)
 
         else:
-            countries = ['argentina', 'australia', 'brazil', 'china', 'india', 'ireland', 'israel', 'italy',
-                         'mexico', 'nepal', 'new zealand', 'panama', 'peru', 'philippines', 'sri lanka',
-                         'ist', 'gmt', 'england', 'london', 'est', 'hst', 'pst', 'mst', 'cst']
             if any(x in m.content.lower() for x in countries):
                 try:
                     flag_country = flag_country.lower()
@@ -93,23 +93,24 @@ class TimeZone:
                     title_c = zone_c.replace('/', ', ').replace('_', ' ')
                     z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
                     try:
-                        e_1 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_1, color=0x7289da)
+                        flag_title = flag_country.title()
+                        e_1 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_1, color=0x7289da)
                         s = await ctx.send(embed=e_1)
-                        await asyncio.sleep(2)
+                        await asyncio.sleep(1)
                         z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_2 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_2, color=0xed791d)
+                        e_2 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_2, color=0xed791d)
                         await s.edit(embed=e_2)
-                        await asyncio.sleep(3)
+                        await asyncio.sleep(2)
                         z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_3 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_3, color=0x7289da)
+                        e_3 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_3, color=0x7289da)
                         await s.edit(embed=e_3)
-                        await asyncio.sleep(5)
+                        await asyncio.sleep(3)
                         z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_4 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_4, color=0xed791d)
+                        e_4 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_4, color=0xed791d)
                         await s.edit(embed=e_4)
-                        await asyncio.sleep(9)
+                        await asyncio.sleep(5)
                         z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_5 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_5, color=0x7289da)
+                        e_5 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_5, color=0x7289da)
                         return await s.edit(embed=e_5)
                     except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                         return await ctx.send(f'{title_c}\n{z_1}')
@@ -166,23 +167,24 @@ class TimeZone:
                     title_c = zone_c.replace('/', ', ').replace('_', ' ')
                     z_1 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
                     try:
-                        e_1 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_1, color=0x7289da)
+                        flag_title = flag_country.title()
+                        e_1 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_1, color=0x7289da)
                         s = await ctx.send(embed=e_1)
-                        await asyncio.sleep(2)
+                        await asyncio.sleep(1)
                         z_2 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_2 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_2, color=0xed791d)
+                        e_2 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_2, color=0xed791d)
                         await s.edit(embed=e_2)
-                        await asyncio.sleep(3)
+                        await asyncio.sleep(2)
                         z_3 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_3 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_3, color=0x7289da)
+                        e_3 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_3, color=0x7289da)
                         await s.edit(embed=e_3)
-                        await asyncio.sleep(5)
+                        await asyncio.sleep(3)
                         z_4 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_4 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_4, color=0xed791d)
+                        e_4 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_4, color=0xed791d)
                         await s.edit(embed=e_4)
-                        await asyncio.sleep(9)
+                        await asyncio.sleep(5)
                         z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
-                        e_5 = discord.Embed(title=f'{flag_country} | {title_c}', description=z_5, color=0x7289da)
+                        e_5 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_5, color=0x7289da)
                         return await s.edit(embed=e_5)
                     except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                         return await ctx.send(f'{title_c}\n{z_1}')
