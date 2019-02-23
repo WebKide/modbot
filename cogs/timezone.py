@@ -180,14 +180,11 @@ class TimeZone:
                     else:
                         pass
 
-        if flag_country is None:
+        else:
             msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} [:flag_gb: / country]`\n\n' \
                 f'**Available:** Argentina, Australia, Brasil, China, India, Ireland, Israel, Italy, ' \
                 f'Mexico, Nepal, New Zealand, Panama, Peru, Philippines, Sri Lanka'
             return await ctx.send(msg, delete_after=23)
-
-        else:
-            pass
 
 
 def setup(bot):
