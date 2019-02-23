@@ -37,6 +37,7 @@ class PresenceLoop:
         # self.loop.create_task(self.periodic_presence_change())  # create presence-loop
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
+        self.loop.create_task(self.periodic_presence_change())
         # self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
 
     @property
@@ -50,16 +51,15 @@ class PresenceLoop:
     # +------------------------------------------------------------+
     @staticmethod
     def periodic_presence_change(self):
-        """ Loop task for rotating presence """
+        """ ✔ Loop task for rotating presence """
         # ###await self.wait_until_ready()
-        self.loop.create_task(self.periodic_presence_change())
         while True:
             for status in activity_list:
                 # To avoid RATE LIMIT:
                 # --> WebSocket connection is closed: code = 4008 (private use), reason = Rate limited.
                 # --> Task was destroyed but it is pending!
-                timer = random.randint(123, 369)
-                await asyncio.sleep(timer)  # The presence-loop change task is applied randomly
+                timer = 69  # random.randint(123, 369)
+                await asyncio.sleep(timer)
 
                 try:
                     if random.randint(1, 2) != 1:
@@ -100,15 +100,13 @@ class PresenceLoop:
 
     @_presence.command(aliases=['listening', 'l'])
     async def listen(self, ctx, *, music: str = None):
-        """ Listening """
         await self.bot.change_presence(status=discord.Status.online,
-                                       activity=discord.Activity(type=discord.ActivityType.listening, 
+                                       activity=discord.Activity(type=discord.ActivityType.listening,
                                                                  name=music))
         await ctx.send(f'Listening to: {music}')
 
     @_presence.command(aliases=['watching', 'w'])
     async def watch(self, ctx, *, video: str = None):
-        """ Watching """
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=discord.Activity(type=discord.ActivityType.listening,
                                                                  name=video))
@@ -116,7 +114,6 @@ class PresenceLoop:
 
     @_presence.command(aliases=['streaming', 's'])
     async def stream(self, ctx, *, stream: str = None):
-        """ Streaming """
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=discord.Activity(type=discord.ActivityType.listening,
                                                                  name=stream))
