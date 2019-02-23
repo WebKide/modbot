@@ -112,6 +112,7 @@ class TimeZone:
                         z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
                         e_5 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_5, color=0x7289da)
                         return await s.edit(embed=e_5)
+
                     except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                         return await ctx.send(f'{title_c}\n{z_1}')
 
@@ -127,7 +128,7 @@ class TimeZone:
 
             else:
                 try:
-                    m_fl = m.content.lower()
+                    m_fl = m.content
                     place = m_fl.replace('🇦🇺', 'Australia/Sydney') \
                                 .replace('🇧🇷', 'America/Sao_Paulo') \
                                 .replace('🇨🇳', 'Asia/Shanghai') \
@@ -144,16 +145,13 @@ class TimeZone:
                                 .replace('🇮🇳', 'Asia/Calcutta') \
                                 .replace('in', 'Asia/Calcutta') \
                                 .replace('🇮🇹', 'Europe/Rome') \
-                                .replace('it', 'Europe/Rome') \
                                 .replace('🇱🇰', 'Asia/Colombo') \
                                 .replace('🇮🇪', 'Europe/Dublin') \
                                 .replace('🇫🇮', 'Europe/Helsinki') \
-                                .replace('fi', 'Europe/Helsinki') \
                                 .replace('🇮🇱', 'Asia/Jerusalem') \
                                 .replace('🇲🇽', 'America/Mexico_City') \
                                 .replace('🇳🇵', 'Asia/Katmandu') \
                                 .replace('🇳🇿', 'Pacific/Auckland') \
-                                .replace('nz', 'Pacific/Auckland') \
                                 .replace('🇵🇦', 'America/Panama') \
                                 .replace('🇵🇪', 'America/Lima') \
                                 .replace('🇵🇭', 'Asia/Manila') \
@@ -186,6 +184,7 @@ class TimeZone:
                         z_5 = datetime.now(timezone(zone_c)).strftime(f'%a %d %b, **%H:**%M:%S')
                         e_5 = discord.Embed(title=f'{flag_title} | {title_c}', description=z_5, color=0x7289da)
                         return await s.edit(embed=e_5)
+
                     except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                         return await ctx.send(f'{title_c}\n{z_1}')
 
