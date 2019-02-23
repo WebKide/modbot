@@ -54,12 +54,11 @@ class TimeZone:
         countries = ['argentina', 'australia', 'brasil', 'china', 'india', 'ireland', 'israel', 'italy',
                      'mexico', 'nepal', 'new zealand', 'panama', 'peru', 'philippines', 'sri lanka',
                      'ist', 'gmt', 'england', 'london', 'est', 'hst', 'pst', 'mst', 'cst']
-        if flag_country is not None:
+        if flag_country.lower() is not None:
             if any(x not in ctx.message.content.lower() for x in countries):
                 try:
                     m_fl = ctx.message.content.lower()
-                    place = m_fl.replace('🇦🇷', 'America/Argentina/Buenos_Aires') \
-                                .replace('🇦🇺', 'Australia/Sydney') \
+                    place = m_fl.replace('🇦🇺', 'Australia/Sydney') \
                                 .replace('🇧🇷', 'America/Sao_Paulo') \
                                 .replace('🇨🇳', 'Asia/Shanghai') \
                                 .replace('🇨🇷', 'America/Costa_Rica') \
@@ -91,7 +90,8 @@ class TimeZone:
                                 .replace('🇵🇱', 'Europe/Warsaw') \
                                 .replace('🇷🇴', 'Europe/Bucharest') \
                                 .replace('🇸🇬', 'Asia/Singapore') \
-                                .replace('🇿🇦', 'Africa/Johannesburg')
+                                .replace('🇿🇦', 'Africa/Johannesburg') \
+                                .replace('🇦🇷', 'America/Argentina/Buenos_Aires')
                     k = place.split('tz ')
                     zone_c = str(k[1:]).strip('[').strip(']').strip('\'').strip(' ')
                     title_c = zone_c.replace('/', ', ')
@@ -126,8 +126,7 @@ class TimeZone:
             if any(x in ctx.message.content.lower() for x in countries):
                 try:
                     flag_country = flag_country.lower()
-                    place = flag_country.replace('argentina', 'America/Argentina/Buenos_Aires') \
-                                        .replace('australia', 'Australia/Sydney') \
+                    place = flag_country.replace('australia', 'Australia/Sydney') \
                                         .replace('brasil', 'America/Sao_Paulo') \
                                         .replace('china', 'Asia/Shanghai') \
                                         .replace('india', 'Asia/Calcutta') \
@@ -147,7 +146,8 @@ class TimeZone:
                                         .replace('mst', 'America/Denver') \
                                         .replace('cst', 'America/Chicago') \
                                         .replace('peru', 'America/Lima') \
-                                        .replace('philippines', 'Asia/Manila')
+                                        .replace('philippines', 'Asia/Manila') \
+                                        .replace('argentina', 'America/Argentina/Buenos_Aires')
                     k = place.split()
                     zone_c = str(k).strip('[').strip(']').strip('\'').strip(' ')
                     title_c = zone_c.replace('/', ', ')
@@ -179,7 +179,7 @@ class TimeZone:
                     else:
                         pass
 
-        if flag_country is None:
+        if flag_country.lower() is None:
             msg = f'**Usage:** `{ctx.prefix}{ctx.invoked_with} [:flag_gb: / country]`\n\n' \
                 f'**Available:** argentina, australia, brasil, china, india, ireland, israel, italy, ' \
                 f'mexico, nepal, new zealand, panama, peru, philippines, sri lanka'
