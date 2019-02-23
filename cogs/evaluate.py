@@ -53,7 +53,7 @@ class Evaluate:
             return f'```py\n{e.__class__.__name__}: {e}\n```'
         return f'```py\n{e.text}{"^":>{e.offset}}\n{e.__class__.__name__}: {e}```'
 
-    @commands.command(name='evaluate', aliases=['eval', 'ev'])
+    @commands.command(name='evaluate', aliases=['eval', 'ev'], hidden=True)
     @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def _evaluate(self, ctx, *, body: str):
         """ ✯ Evaluate some python code """
