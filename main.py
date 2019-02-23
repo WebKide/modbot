@@ -74,9 +74,6 @@ class ModBot(commands.Bot):
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
         self.run(os.getenv('TOKEN').strip('\"'))
         self.version = __version__
-        self.add_command(self.prefix)  # hidden cmd
-        self.add_command(self.avy)  # hidden cmd
-        self.add_command(self.name)  # hidden cmd
         self.load_extensions()  # automatically loads plugins inside /cogs/
         self.loop.create_task(self.periodic_presence_change())  # create presence-loop
         self.mod_color = discord.Colour(0x7289da)  # Blurple
@@ -189,11 +186,11 @@ class ModBot(commands.Bot):
               '│█████████████████░░░ 88% │\n'
               '└─────────────────────────┘\n')
 
-        status = "this server"
+        status = "@Mod help | Snuff by Slipknot"
         await self.change_presence(status=discord.Status.online,
-                                   activity=discord.Activity(type=discord.ActivityType.watching,
+                                   activity=discord.Activity(type=discord.ActivityType.listening,
                                                              name=status))
-        msg = f'<:thonkingcool:540582184306606113> `Status set to:` Watching **{status}** | `{self.ws.latency * 1000:.2f} ms`'
+        msg = f'<:thonkingcool:540582184306606113> `Status set to:` Listening to **{status}** | `{self.ws.latency * 1000:.2f} ms`'
         await self.get_channel(status_loop_channel).send(msg)
         # ==================================================
         #              Waking up message!
@@ -207,48 +204,6 @@ class ModBot(commands.Bot):
                 await self.get_channel(gen_chan).send(txt)
             except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                 pass
-
-    # +------------------------------------------------------------+
-    # |             Activity Presence-loop task                    |
-    # +------------------------------------------------------------+
-    async def periodic_presence_change(self):
-        """ ✔ Loop task for rotating presence """
-        await self.wait_until_ready()
-        while True:
-            for status in activity_list:
-                # To avoid RATE LIMIT:
-                # --> WebSocket connection is closed: code = 4008 (private use), reason = Rate limited.
-                # --> Task was destroyed but it is pending!
-                timer = random.randint(123, 369)
-                await asyncio.sleep(timer)  # The presence-loop change task is applied randomly
-
-                if random.randint(1, 2) != 1:
-                    await self.change_presence(status=discord.Status.dnd,
-                                                      activity=discord.Activity(type=discord.ActivityType.watching,
-                                                                                name=status))
-                    try:
-                        watchin = f'\N{FILM FRAMES} `Status set to:` Watching **{status}** | `after: {timer} sec`'
-                        await self.get_channel(status_loop_channel).send(watchin)  # to track time gap
-
-                    except discord.HTTPException:
-                        pass
-
-                else:
-                    await self.change_presence(status=discord.Status.online,
-                                               activity=discord.Activity(type=discord.ActivityType.listening,
-                                                                         name=status))
-                    listen = f'\N{HEADPHONE} `Status set to:` Listening to **{status}** | `after: {timer} sec`'
-                    try:
-                        await self.get_channel(status_loop_channel).send(listen)  # to track time gap between changes
-
-                    except discord.HTTPException:
-                        pass
-
-    @property
-    def session(self):
-        if self.session is None:
-            self.session = ClientSession(loop=self.loop)
-        return self.session
 
     # +------------------------------------------------------------+
     # |               Cliché commands                              |
@@ -340,7 +295,7 @@ class ModBot(commands.Bot):
                         value=f'`{up_time}`')
 
             e.add_field(name='<:Terminal:527401285754814474> Bot Source',
-                        value='[Github](https://github.com/webkide) | [GitLab](https://gitlab.com/webkide)')
+                        value='[Github](https://github.com/webkide/modbot/) | [GitLab](https://gitlab.com/webkide)')
 
             e.add_field(name='<:zoomeyes:492155933263396865> Protecting',
                         value=f'`{len(b.guilds)}` guild(s)\n`{total_unique}` members\n'
@@ -365,152 +320,6 @@ class ModBot(commands.Bot):
             return await ctx.send(z)
 
     # +------------------------------------------------------------+
-    # |               Developer commands!                          |
-    # +------------------------------------------------------------+
-    @commands.command(description='Command for bot developer', no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def avy(self, ctx, *, png_link: str = None):
-        """
-        ✯ Change Modbot's avatar
-        Usage: use a square image in PNG format,
-        make sure URL starts with https://
-        and ends with .png
-
-        Don't change avatar too fast, or this
-        command will return: BAD REQUEST error
-        """
-        if ctx.message.author.id in (dev[1] for dev in dev_list):
-            try:
-                if png_link is None:
-                    try:
-                        await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        msg = "where's image URL for my new avatar?"
-                        return await ctx.send(msg, delete_after=9)
-
-                if png_link is not None:
-
-                    if png_link.startswith('https://') and png_link.endswith('.png') or png_link.endswith('.PNG'):
-                        try:
-                            file = png_link.replace('<', '').replace('>', '')
-                            await ctx.channel.trigger_typing()
-                            async with self.session.get(file) as resp:
-                                img = await resp.read()
-                                await ctx.bot.user.edit(avatar=img)
-
-                                try:
-                                    try:
-                                        gav = ctx.message.icon_url
-
-                                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                                        gav = 'https://cdn.discordapp.com/embed/avatars/0.png'
-                                    g = ctx.message
-                                    u = ctx.message.author
-                                    e = discord.Embed(color=discord.Colour(0xed791d))
-                                    e.set_author(name=f'{u.name} | {u.display_name} | {u.id}')
-                                    e.set_thumbnail(url=png_link)
-                                    e.description = f'Successfully changed avatar (photo)[{png_link}]'
-                                    e.set_footer(text=f'{g.guild} | {g.guild.id}', icon_url=gav)
-
-                                    await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-                                    await ctx.bot.get_channel(540600062217158666).send(embed=e)
-                                    return await ctx.send(embed=e)
-
-                                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                                    msg = "where's image URL for my new avatar?"
-                                    return await ctx.send(msg, delete_after=9)
-
-                        except Exception as e:
-                            tb = traceback.format_exc()
-                            await ctx.send(f'```py\n1.{e}\n!------------>\n{tb}```')
-                    else:
-                        await ctx.send('Only PNG files are supported')
-
-            except Exception as e:
-                tb = traceback.format_exc()
-                await ctx.send(f'```py\n2.{e}\n!------------>\n{tb}```')
-        else:
-            return
-
-    @commands.command(description='Command for bot developer', no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def name(self, ctx, text: str = None):
-        """
-        ✯ Change Modbot's name
-        Usage: to change bot's name, simply
-        write any valid text.
-
-        Don't change bot's name too fast, or this
-        command will return: BAD REQUEST error
-        """
-        if ctx.message.author.id in (dev[1] for dev in dev_list):
-            try:
-                if text is None:
-                    try:
-                        await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        msg = "what's gonna be my new name?"
-                        return await ctx.send(msg, delete_after=9)
-
-                if text is not None:
-                    try:
-                        await ctx.channel.trigger_typing()
-                        await ctx.bot.user.edit(username=text)
-                        try:
-                            await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-
-                        except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                            pass
-
-                        finally:
-                            await ctx.send(f'Thanks for renaming me **{text}**!')
-
-                    except discord.HTTPException:  # You are changing your username too fast. Try again later.
-                        await ctx.send("Changing Modbot's name too fast. Try again later, or use a nickname")
-
-            except Exception as e:
-                tb = traceback.format_exc()
-                await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
-        else:
-            return
-
-    @commands.command(description='Command for bot owner', hidden=True, no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def prefix(self, ctx, *, prefix: str = None):
-        """ ✯ Change prefix temporarily """
-        if ctx.author.id not in (dev[1] for dev in dev_list):
-            return
-
-        else:
-            if prefix is None:
-                try:
-                    await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-
-                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                    msg = "what's supposed to be my new prefix?"
-                    return await ctx.send(msg, delete_after=9)
-
-            if prefix is not None:
-                try:
-                    await ctx.channel.trigger_typing()
-                    os.environ['PREFIX'] = prefix
-
-                    try:
-                        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        pass
-
-                    finally:
-                        msg = f'\U00002705 Temporary prefix set to: `{prefix}`'
-                        return await ctx.send(msg, delete_after=9)
-
-                except discord.Forbidden:
-                    return
-
-    # +------------------------------------------------------------+
     # |               Bot Owner commands!                          |
     # +------------------------------------------------------------+
     @commands.command(description='Command for bot owner', hidden=True, no_pm=True)
@@ -526,14 +335,16 @@ class ModBot(commands.Bot):
                 await self.logout()
 
             except Exception as e:
-                tb = traceback.format_exc()
-                await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
+                if ctx.message.guild.id == 540072370527010841:
+                    tb = traceback.format_exc()
+                    await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
+                else:
+                    pass
 
         else:
             if random.randint(1, 3) != 1:
                 warn = '(ง •̀•́)ง fite me!'
                 return await ctx.channel.send(warn, delete_after=60)
-
             else:
                 pass
 
@@ -562,9 +373,11 @@ class ModBot(commands.Bot):
                         return await ctx.send(f'Loaded plugin **{cog}.py** successfully')
 
                 except Exception as e:
-                    await ctx.channel.trigger_typing()
-                    tb = traceback.format_exc()
-                    await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
+                    if ctx.message.guild.id == 540072370527010841:
+                        await ctx.channel.trigger_typing()
+                        tb = traceback.format_exc()
+                        await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
+
                     try:
                         await ctx.message.add_reaction('\N{LARGE RED CIRCLE}')
                     except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
@@ -600,9 +413,10 @@ class ModBot(commands.Bot):
                         return await ctx.send(msg, delete_after=9)
 
                 except Exception as e:
-                    await ctx.channel.trigger_typing()
-                    tb = traceback.format_exc()
-                    await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
+                    if ctx.message.guild.id == 540072370527010841:
+                        await ctx.channel.trigger_typing()
+                        tb = traceback.format_exc()
+                        await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
 
                     try:
                         await ctx.message.add_reaction('\N{LARGE RED CIRCLE}')
