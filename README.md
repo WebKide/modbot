@@ -27,6 +27,10 @@ This modbot uses discord.py rewrite, the latest version of the library for Disco
 <img src="http://forthebadge.com/images/badges/built-with-love.svg?style=for-the-badge" alt="built with love" />
 </a>
 </div>
+<div align="center">
+  <p><b>Join our community for support, or to interact with the Devs and other great members</b></p>
+<p><a href="https://discord.gg/HDJZnEj"><img src="https://discordapp.com/api/guilds/540072370527010841/widget.png?style=banner2" alt="Development & Support server" /></a></p>
+</div>
 
 ## .::: Installation :::.
 
@@ -71,6 +75,8 @@ As the features become live, they will be marked with a ✔ sign next to them, w
 
 List of available commands and how to use them. If you need more help, use `@mod help COMMAND_NAME` to get further info.
 
+If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
+
 <table style="width:100%">
   <tr>
     <th>Name</th>
@@ -89,7 +95,7 @@ List of available commands and how to use them. If you need more help, use `@mod
   <tr>
     <td>about</td>
     <td>info/invite</td>
-    <td>@about</td>
+    <td>@mod about</td>
     <td> n/a </td>
     <td>Modbot info page</td>
   </tr>
@@ -138,14 +144,7 @@ List of available commands and how to use them. If you need more help, use `@mod
   
 </table>
 
-<div align="center">
-  <p><b>Join our community for support, or to interact with the Devs and other great members</b></p>
-<p><a href="https://discord.gg/HDJZnEj"><img src="https://discordapp.com/api/guilds/540072370527010841/widget.png?style=banner2" alt="Development & Support server" /></a></p>
-</div>
-
-If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
-
-NOTE: *Do not ask for Anonymous Mass DM command! Or any anonymous command!*
+NOTE: *Do not ask for Mass DM command! Or any Anonymous command!*
 =
 this ModBot is meant to help mods manage a server, to automate certain tasks that consume time, and most of all, ease the experience of everyone in the server. However, there has to be a trail of actions so that Mods don't abuse their power. 
 
