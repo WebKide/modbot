@@ -117,7 +117,7 @@ List of available commands and how to use them. If you need more help, use `@mod
     <td>load</td>
     <td> n/a </td> 
     <td>@mod load</td>
-    <td>@mod load calculate</td>
+    <td>@mod load calculator</td>
     <td><em>Load a mod plugin</em></td>
   </tr>
   <tr>
@@ -131,7 +131,7 @@ List of available commands and how to use them. If you need more help, use `@mod
     <td>unload</td>
     <td> n/a </td> 
     <td>@mod unload</td>
-    <td>@mod unload calc</td>
+    <td>@mod unload calculator</td>
     <td><em>Unload any mod plugin</em></td>
   </tr>
   <tr>
