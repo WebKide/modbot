@@ -1,6 +1,6 @@
 <div align="center">
 <p>
-<img src="https://i.imgur.com/N13YyuA.png" alt="modbot logo" />
+<img src="https://i.imgur.com/NHDkkaW.png" alt="modbot logo" />
 </p>
 <p><i><b>a Moderation bot for your Discord server! 「ReWrite」</b></i></p>
 </div>
@@ -19,7 +19,7 @@
 </a>
 </div>
 
-## .::: Welcome :::.
+# .::: Welcome :::.
 This modbot uses discord.py rewrite, the latest version of the library for Discord bots.
 
 <div align="center">
@@ -42,7 +42,7 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/WebKide/modbot/tree/master)
 
-## .::: Features :::.
+# .::: Features :::.
 <div>
 <a href="#">
 <img src="http://forthebadge.com/images/badges/made-with-crayons.svg?style=for-the-badge" alt="made with crayons" />
@@ -73,14 +73,14 @@ As the features become live, they will be marked with a ✔ sign next to them, w
 
 ## .::: List of Commands :::.
 
-List of available commands and how to use them. If you need more help, use `@mod help COMMAND_NAME` to get further info.
-
 If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
+
+List of available commands and how to use them. If you need more help, use `@mod help COMMAND_NAME` to get further info.
 
 <table style="width:100%">
   <tr>
     <th>Name</th>
-    <th>Alias</th> 
+    <th>Aliases</th> 
     <th>Usage</th>
     <th>Sample</th>
     <th>Definition</th>
@@ -90,56 +90,56 @@ If you want to request features or commands, [create an issue](https://github.co
     <td> n/a </td>
     <td>@mod help</td>
     <td>@mod help ping</td>
-    <td>Shows this message.</td>
+    <td><em>Shows this message.</em></td>
   </tr>
   <tr>
     <td>about</td>
     <td>info/invite</td>
     <td>@mod about</td>
     <td> n/a </td>
-    <td>Modbot info page</td>
+    <td><em>Modbot info page</em></td>
   </tr>
   <tr>
-    <th>ping</th>
-    <th> n/a </th> 
-    <th>@mod ping</th>
-    <th> n/a </th>
-    <th>Websocket latency, Pong!</th>
+    <td>ping</td>
+    <td> n/a </td> 
+    <td>@mod ping</td>
+    <td> n/a </td>
+    <td><em>Websocket latency, Pong!</em></td>
   </tr>
   <tr>
-    <th>calc</th>
-    <th>calculate</th> 
-    <th>@mod calc</th>
-    <th>@mod calc 2 + 3</th>
-    <th>Do some math</th>
+    <td>calc</td>
+    <td>calculate</td> 
+    <td>@mod calc</td>
+    <td>@mod calc 2 + 3</td>
+    <td><em>Do some math</em></td>
   </tr>
   <tr>
-    <th>load</th>
-    <th> n/a </th> 
-    <th>@mod load</th>
-    <th>@mod load calculate</th>
-    <th>Load a mod plugin</th>
+    <td>load</td>
+    <td> n/a </td> 
+    <td>@mod load</td>
+    <td>@mod load calculate</td>
+    <td><em>Load a mod plugin</em></td>
   </tr>
   <tr>
-    <th>reload</th>
-    <th> n/a </th> 
-    <th>@mod reload</th>
-    <th>@mod reload timezone</th>
-    <th>Reload any mod plugin</th>
+    <td>reload</td>
+    <td> n/a </td> 
+    <td>@mod reload</td>
+    <td>@mod reload timezone</td>
+    <td><em>Reload any mod plugin</em></td>
   </tr>
   <tr>
-    <th>unload</th>
-    <th> n/a </th> 
-    <th>@mod unload</th>
-    <th>@mod unload calc</th>
-    <th>Unload any mod plugin</th>
+    <td>unload</td>
+    <td> n/a </td> 
+    <td>@mod unload</td>
+    <td>@mod unload calc</td>
+    <td><em>Unload any mod plugin</em></td>
   </tr>
   <tr>
-    <th>tz</th>
-    <th>timezone</th> 
-    <th>@mod tz</th>
-    <th>@mod tz GMT</th>
-    <th>Return current time for a particular timezone</th>
+    <td>tz</td>
+    <td>timezone</td> 
+    <td>@mod tz</td>
+    <td>@mod tz GMT</td>
+    <td><em>Return current time for a particular timezone</em></td>
   </tr>
   
 </table>
