@@ -1,0 +1,39 @@
+{
+  "name": "Modbot",
+  "description": "a Moderation bot for your Discord server! 「ReWrite」",
+  "repository": "https://github.com/WebKide/modbot",
+  "env": {
+    "TOKEN": {
+        "description": "Modbot app's token. The token of your instance of Modbot.",
+        "required": true
+    },
+    "OWNER": {
+        "description": "Your Discord ID, only required if you are proficient at Python3. (evaluate)",
+        "required": false
+    },
+    "PREFIX": {
+        "description": "Default prefix is mention: `@bot`, `botto` and `modbot`. If you need a different prefix, place it here.",
+        "required": false
+    },
+    "LOG_CHAN_ID": {
+        "description": "Required channel ID to keep logs of errors and other events.",
+        "required": true
+    },
+    "ON_DEL_CHAN_ID": {
+        "description": "Required channel ID to keep a copy of deleted messages.",
+        "required": false
+    },
+    "WELCOME_CHAN": {
+        "description": "Welcome channel name or ID. Only if you want modbot to welcome members with default message.",
+        "required": false
+    },
+    "WELCOME_MSG": {
+        "description": "Custom welcome message for new members upon joining server, it supports bold and emojis.",
+        "required": false
+    },
+    "AUTO_ROLE": {
+        "description": "Automatic role name for members upon joining server.",
+        "required": false
+    }
+  }
+}
