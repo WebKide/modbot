@@ -45,22 +45,23 @@ Heroku is a container based cloud platform that offers free plans to host web ap
 </a>
 </div>
 
-As the features become live, they will be marked with a ✔ sign next to them: 
+As the features become live, they will be marked with a ✔ sign next to them, whereas the ones that are in current development contain WorkInProgress: 
 
 * Moderation commands
 * Security commands
 * Webhooks commands
-* Join autoroles
+* Join autoroles <b>(WIP)</b>
 * Self assignable roles
-* Welcome / farewell message
+* Welcome / farewell message <b>(WIP)</b>
 * Channel monitor
 * Remind commands
 * Custom prefix / @modbot
-* Interactive commands
+* Interactive commands <b>(WIP)</b>
 * Set locale (translations)
-* Misc commands
-* <b>✔ Eval</b>
-+ <b>✔ Calc</b>
+* Misc commands <b>(WIP)</b>
+* <b>✔ Eval
++ ✔ Calc
++ ✔ Timezone</b>
 + Wiki
 + Urban
 + Search
@@ -69,7 +70,7 @@ As the features become live, they will be marked with a ✔ sign next to them:
 
 <div align="center">
   <p><b>Join our community for support, or to interact with the Devs and other great members</b></p>
-<p><a href="https://discord.gg/HDJZnEj"><img src="https://discordapp.com/api/guilds/355697873167319041/widget.png?style=banner2" alt="Development & Support server" /></a></p>
+<p><a href="https://discord.gg/HDJZnEj"><img src="https://discordapp.com/api/guilds/540072370527010841/widget.png?style=banner2" alt="Development & Support server" /></a></p>
 </div>
 
 If you want to request features or commands, [create an issue](https://github.com/WebKide/modbot/issues) on this repo.
