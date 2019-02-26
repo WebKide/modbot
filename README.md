@@ -30,7 +30,7 @@ This modbot uses discord.py rewrite, the latest version of the library for Disco
 
 ## .::: Installation :::.
 
-Installation guide WIP [work in progress]!
+Installation guide. <b>(WIP)</b>
 
 ## .::: What is heroku? :::.
 
@@ -60,13 +60,83 @@ As the features become live, they will be marked with a ✔ sign next to them, w
 * Set locale (translations)
 * Misc commands <b>(WIP)</b>
 * <b>✔ Eval
-+ ✔ Calc
-+ ✔ Timezone</b>
-+ Wiki
-+ Urban
-+ Search
-+ mal
+* ✔ Calc
+* ✔ Timezone</b>
+* Wiki
+* Urban
+* Search
+* mal
 
+## .::: List of Commands :::.
+
+List of available commands and how to use them. If you need more help, use `@mod help COMMAND_NAME` to get further info.
+
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Alias</th> 
+    <th>Usage</th>
+    <th>Sample</th>
+    <th>Definition</th>
+  </tr>
+  <tr>
+    <td>help</td>
+    <td> n/a </td>
+    <td>@mod help</td>
+    <td>@mod help ping</td>
+    <td>Shows this message.</td>
+  </tr>
+  <tr>
+    <td>about</td>
+    <td>info/invite</td>
+    <td>@about</td>
+    <td> n/a </td>
+    <td>Modbot info page</td>
+  </tr>
+  <tr>
+    <th>ping</th>
+    <th> n/a </th> 
+    <th>@mod ping</th>
+    <th> n/a </th>
+    <th>Websocket latency, Pong!</th>
+  </tr>
+  <tr>
+    <th>calc</th>
+    <th>calculate</th> 
+    <th>@mod calc</th>
+    <th>@mod calc 2 + 3</th>
+    <th>Do some math</th>
+  </tr>
+  <tr>
+    <th>load</th>
+    <th> n/a </th> 
+    <th>@mod load</th>
+    <th>@mod load calculate</th>
+    <th>Load a mod plugin</th>
+  </tr>
+  <tr>
+    <th>reload</th>
+    <th> n/a </th> 
+    <th>@mod reload</th>
+    <th>@mod reload timezone</th>
+    <th>Reload any mod plugin</th>
+  </tr>
+  <tr>
+    <th>unload</th>
+    <th> n/a </th> 
+    <th>@mod unload</th>
+    <th>@mod unload calc</th>
+    <th>Unload any mod plugin</th>
+  </tr>
+  <tr>
+    <th>tz</th>
+    <th>timezone</th> 
+    <th>@mod tz</th>
+    <th>@mod tz GMT</th>
+    <th>Return current time for a particular timezone</th>
+  </tr>
+  
+</table>
 
 <div align="center">
   <p><b>Join our community for support, or to interact with the Devs and other great members</b></p>
