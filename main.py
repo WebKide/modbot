@@ -21,7 +21,6 @@ SOFTWARE.
 import discord
 import random
 import asyncio
-import datetime
 import traceback
 import os
 import re
@@ -30,8 +29,10 @@ from psutil import Process
 from discord.ext import commands
 from pathlib import Path
 from aiohttp import ClientSession
+from datetime import datetime
+from pytz import timezone
 
-__version__ = '0.05.0'  # first int is main, second is stable, third is working release [0.00.0]
+__version__ = '0.05.1'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
     ('WebKide', 323578534763298816),
     ('Kybre', 325012556940836864)
@@ -195,7 +196,8 @@ class ModBot(commands.Bot):
         # ==================================================
         #              Waking up message!
         # ==================================================
-        txt = f"ᕙ(⇀‸↼‶)ᕗ I'm up madafaka! `{self.ws.latency * 1000:.2f}` ms"
+        result = datetime.now(timezone('Europe/London')).strftime(f'**%a** %d %b, **%H**:%M:%S')
+        txt = f'Websocket: `{self.ws.latency * 1000:.2f}` ms\n{result}'
         try:
             await self.get_channel(540600062217158666).send(txt)
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
