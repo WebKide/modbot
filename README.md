@@ -1,6 +1,6 @@
 <div align="center">
 <p>
-<img src="https://i.imgur.com/NHDkkaW.png" alt="modbot logo" />
+<img src="https://i.imgur.com/tiwewHK.png" alt="modbot logo" />
 </p>
 <p><b><i>a Moderation bot for your Discord server!</i> 「ReWrite」</b></p>
 </div>
