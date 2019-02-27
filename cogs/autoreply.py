@@ -37,14 +37,21 @@ from pathlib import Path
 
 dev_list = [('WebKide', 323578534763298816)]
 bot_channel = 375179500604096512
-guilds_spam = [('Mds', 540072370527010841),
-               ('spam_log', 540600062217158666),
-               ('invites', 541059392951418880),
-               ('msg_log', 541061070907899905),
-               ('default', 540072370979864577),
-               ('ignored_chan', 540582467648749569),
-               ('ssevana', 328341202103435264),
-               ('mds', 540072370527010841)]
+guilds_spam = [
+    ('Mds', 540072370527010841),
+    ('spam_log', 540600062217158666),
+    ('invites', 541059392951418880),
+    ('msg_log', 541061070907899905),
+    ('default', 540072370979864577),
+    ('ignored_chan', 540582467648749569),
+    ('ssevana', 328341202103435264)
+]
+whitelisted_guilds = [('Modbot DS', 540072370527010841)]
+blacklisted_users = [
+    ('bv', 358433182304960513),
+    ('4jr', 180314310298304512),
+    ('kybre', 325012556940836864)
+]
 
 
 class AutoReply:
@@ -66,7 +73,10 @@ class AutoReply:
         if message is None:
             return
 
-        if message.guild.id not in (x[1] for x in guilds_spam):
+        if message.guild.id not in (x[1] for x in whitelisted_guilds):
+            return
+
+        if message.author.id in (x[1] for x in blacklisted_users):
             return
 
         userinfo = f'**{message.author.display_name}** | `{message.author.id}`'
@@ -77,24 +87,22 @@ class AutoReply:
         # |          I am Modbot, nice to meet you                     |
         # +------------------------------------------------------------+
         if message.content.startswith('I am '):
-            if message.author.id == 358433182304960513:
-                return
-            
+
             if random.randint(1, 3) != 1:
                 return
 
             else:
                 try:
-                    hello = ['Hello', 'nice to meet you', 'Hi there', 'Haribol', 'hello', 'henlo', 'Namasté', 'PAMHO',
-                             'Ciao', 'Hare Krishna', 'how is it going', 'long time no see', 'howdy', 'My pleasure',
+                    hello = ['Hello', 'nice to meet you', 'Hi there', 'Rādhe Rādhe', 'hello', 'henlo', 'Namasté',
+                             'Ciao', 'Buon giorno', 'how is it going', 'long time no see', 'howdy', 'My pleasure',
                              'Shalom', 'Konnichiwa', 'how are things', 'good to see you', 'Bonjour', 'Guten Tag',
                              'Privet', 'Anyoung haseyo', 'Ahlan', 'Nǐ hǎo', 'Qué tal', 'Parev', 'Hallo', 'Aloha',
                              'Dia dhuit', 'Bunã ziua', 'Merhaba', 'Vitayu', 'Hei', 'Vaya vaya', 'Caramba']
                     i_am = ['I am', 'my name is', 'me llamo', 'you can call me', 'pleasure meeting you, I am',
-                            'please call me']
-                    response = f'{random.choice(hello)} **{message.content[5:]}**, {random.choice(i_am)} modbot'
+                            'please call me', 'watashi wa', 'Io mi chiamo', 'Ich heiße']
+                    rep = f'{random.choice(hello)} *{message.content[5:].title()}*, {random.choice(i_am)} Modbot'
 
-                    await message.channel.send(response)
+                    await message.channel.send(rep)
 
                 except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                     return
@@ -103,8 +111,6 @@ class AutoReply:
         # |          Flipping tables, it might spam the chat           |
         # +------------------------------------------------------------+
         if message.content.startswith('(╯°□°）╯︵ ┻━┻'):
-            if message.author.id == 358433182304960513:
-                return
 
             if random.randint(1, 3) != 1:
                 return
