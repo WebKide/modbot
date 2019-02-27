@@ -125,6 +125,10 @@ class Calculator:
         """ ✔ Do some math
         thanks to Paul McGuire's fourFn.py. """
         person = ctx.message.author
+        formula = formula.replace('x', '*').replace('minus', '-').replace('plus', '+').replace('into', '/') \
+                         .replace('sub', '-').replace('pi', 'PI').replace('divide', '/').replace('multiply', '*') \
+                         .replace('add', '+').replace('div', '/').replace('mult', '*').replace('mul', '*') \
+                         .replace('π', 'PI').replace('÷', '/')
 
         if formula == None:
             # How can it calculate an empty message? Reee!
@@ -142,21 +146,23 @@ class Calculator:
             answer=self.nsp.eval(formula)
         except:
             # If there's a problem in the input, show examples
-            msg = f'\N{THINKING FACE} wrong {formula} input.\nTry any of these:'
+            msg = f'\N{THINKING FACE} wrong `{formula}` input.\n\nTry any of these:'
             e = discord.Embed(color=self.user_color)
             e.description = f'\u200B{msg}'
-            e.add_field(name='multiplication', value="`num` * `num`", inline=True)
-            e.add_field(name='division', value="`num` / `num`", inline=True)
-            e.add_field(name='addition', value="`num` + `num`", inline=True)
-            e.add_field(name='rest', value="`num` - `num`", inline=True)
-            e.add_field(name='exponential', value="`num` ^ `num`")
-            e.add_field(name='integer', 
-                        value="[`num` + `num` | `num` - `num`] `num` 0 `num`..`num` 9 `num` +")
+            e.add_field(name='multiply', value='`2 * 3 x 5 multiply 7`')
+            e.add_field(name='divide', value='`91 / 5 divide 3 into 2 ÷ 4`')
+            e.add_field(name='add', value='`1 + 4 plus 8 add 23`')
+            e.add_field(name='substract', value='`91 - 35 minus 3 sub 12`')
+            e.add_field(name='exponential', value="`7 ^ 5`")
+            e.add_field(name='Supported formulas', 
+                        value='```py\nround((cos(45) + (3+7^2)*2 + tan(369.18)) / π - 3)```')
 
             try:
                 await ctx.send(embed=e, delete_after=23)
             except discord.HTTPException:
-                await ctx.send(msg, delete_after=23)
+                error = f'\N{THINKING FACE} wrong `{formula}` input.\n\n ' \
+                        f'Try any of these:```py\nround((cos(45) + (3+7^2)*2 + tan(369.18)) / π - 3)```'
+                await ctx.send(error, delete_after=23)
             return
 
         # Correct input prints correct answer
