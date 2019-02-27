@@ -6,6 +6,7 @@ chardet
 colorthief
 dhooks
 lxml
+mtranslate
 parsedatetime
 Pillow
 psutil<5.3.2
