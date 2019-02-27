@@ -230,7 +230,7 @@ class Translate:
     @commands.group(description='Command to translate across languages', aliases=['tr'],  invoke_without_command=True)
     async def translate(self, ctx, lang: str = None, *, text: str = None):
         """
-        Translate text between languages
+        ✔ Translate text between languages
 
         Use subcommand to show short list of languages:
         translate langs
@@ -258,8 +258,8 @@ class Translate:
                 t = f'{translate(text, lang)}'
                 e = discord.Embed(color=self.user_color)
                 e.set_author(name=m, icon_url=ctx.message.author.avatar_url),
-                e.add_field(name='Original1', value=f'*```css\n{text}```*', inline=False)
-                e.add_field(name='Translation1', value=f'```css\n{t}```', inline=False)
+                e.add_field(name='Original', value=f'*```css\n{text}```*', inline=False)
+                e.add_field(name='Translation', value=f'```css\n{t}```', inline=False)
                 e.set_footer(text=duration, icon_url='https://i.imgur.com/yeHFKgl.png')
                 try:
                     await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
@@ -272,8 +272,8 @@ class Translate:
                 tn = f'{translate(text, lang)}'
                 em = discord.Embed(color=self.user_color)
                 em.set_author(name=m, icon_url=ctx.message.author.avatar_url),
-                em.add_field(name='Original2', value=f'*```css\n{text}```*', inline=False)
-                em.add_field(name='Translation2', value=f'```css\n{tn}```', inline=False)
+                em.add_field(name='Original', value=f'*```css\n{text}```*', inline=False)
+                em.add_field(name='Translation', value=f'```css\n{tn}```', inline=False)
                 em.set_footer(text=duration, icon_url='https://i.imgur.com/yeHFKgl.png')
                 try:
                     await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
@@ -309,7 +309,7 @@ class Translate:
 
     @translate.command()
     async def langs(self, ctx):
-        """ List available languages """
+        """ ✔ List available languages """
         available = ', '.join(conv.values())
         foo = 'Full list in https://github.com/WebKide/modbot/data/langs.json'
 
