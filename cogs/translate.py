@@ -223,7 +223,8 @@ class Translate:
     """
     def __init__(self, bot):
         self.bot = bot
-        self.lang_conv = None
+        self.user_color = discord.Colour(0xed791d) ## orange
+        self.mod_color = discord.Colour(0x7289da) ## blurple
 
 
     @commands.group(description='Command to translate across languages', aliases=['tr'],  invoke_without_command=True)
@@ -234,6 +235,7 @@ class Translate:
         Use subcommand to show short list of languages:
         translate langs
         """
+        available = ', '.join(conv.values())
         languages = 'Albanian, Arabic, Aymara, Belarusian, Bulgarian, Catalan, Chinese, Croatian, Czech, ' \
                     'Danish, Dutch, English, Estonian, Fijian, Finnish, French, Georgian, German, Greek, ' \
                     'Hebrew, Hindi, Irish, Icelandic, Italian, Japanese, Kannada, Kashmiri, Korean, Latin, ' \
@@ -241,24 +243,43 @@ class Translate:
                     'Quechua, Romanian, Russian, Sanskrit, Scottish-Gaelic, Spanish, Swahili, Swedish, ' \
                     'Tamil, Telugu, Tagalog, Turkish, Urdu, Welsh, Yiddish, Zulu \n\nFor full list: \n' \
                     'https://github.com/WebKide/modbot/data/langs.json'
-        m = ctx.message
+        m = f'{ctx.message.author.display_name} | {ctx.message.author.id}'
         msg = f'**Usage:** {ctx.prefix}{ctx.invoked_with} <language_from_list> <message>\n\n```bf\n{languages}```'
-        t = f'*{translate(text, lang)}*'
         distance = self.bot or self.bot.message
         duration = f'Translated in {distance.ws.latency * 990:.2f} ms'
 
         try:
-            em = discord.Embed(color=discord.Color.blue())
+            em = discord.Embed(color=self.mod_color)
             em.set_author(name='Available Languages:', icon_url=ctx.message.author.avatar_url),
             em.description = f'```bf\n{available}```'
             em.set_footer(text=duration, icon_url='https://i.imgur.com/yeHFKgl.png')
 
             if lang in conv:
-                return await ctx.send(t)
+                t = f'{translate(text, lang)}'
+                e = discord.Embed(color=self.user_color)
+                e.set_author(name=m, icon_url=ctx.message.author.avatar_url),
+                e.add_field(name='Original1', value=f'*```css\n{text}```*', inline=False)
+                e.add_field(name='Translation1', value=f'```css\n{t}```', inline=False)
+                e.set_footer(text=duration, icon_url='https://i.imgur.com/yeHFKgl.png')
+                try:
+                    await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
+                    pass
+                return await ctx.send(embed=e)
 
             lang = dict(zip(conv.values(), conv.keys())).get(lang.lower().title())
             if lang:
-                await ctx.send(t)
+                tn = f'{translate(text, lang)}'
+                em = discord.Embed(color=self.user_color)
+                em.set_author(name=m, icon_url=ctx.message.author.avatar_url),
+                em.add_field(name='Original2', value=f'*```css\n{text}```*', inline=False)
+                em.add_field(name='Translation2', value=f'```css\n{tn}```', inline=False)
+                em.set_footer(text=duration, icon_url='https://i.imgur.com/yeHFKgl.png')
+                try:
+                    await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
+                    pass
+                await ctx.send(embed=em)
 
             else:
                 # await ctx.send(f'​`Language not available.​`\n\n{traceback.format_exc()}', delete_after=69)
@@ -266,15 +287,25 @@ class Translate:
 
         except discord.Forbidden:
             if lang in conv:
-                return await ctx.send(t)
+                trans = f'{ctx.message.author.mention} | *{translate(text, lang)}*'
+                return await ctx.send(trans)
 
             lang = dict(zip(conv.values(), conv.keys())).get(lang.lower().title())
             if lang:
-                await ctx.send(t)
+                trans = f'{ctx.message.author.mention} | *{translate(text, lang)}*'
+                await ctx.send(trans)
+                try:
+                    await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
+                    pass
 
             else:
                 # await ctx.send(f'​`Language not available.​`\n\n{traceback.format_exc()}', delete_after=69)
                 await ctx.send(msg, delete_after=23)
+                try:
+                    await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
+                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
+                    pass
 
     @translate.command()
     async def langs(self, ctx):
