@@ -65,7 +65,8 @@ As each feature comes live, they will be marked with a <b>✔</b> sign next to t
 * Misc commands <b>(WIP)</b>
 * <b>Eval ✔
 * Calc ✔
-* Timezone ✔</b>
+* Timezone ✔
+* Translator ✔</b>
 * Wiki
 * Urban
 * Search
@@ -140,6 +141,13 @@ List of available commands and how to use them. If you need more help, use `@mod
     <td>@mod tz</td>
     <td>@mod tz GMT</td>
     <td><em>Return current time for a particular timezone</em></td>
+  </tr>
+  <tr>
+    <td>tr</td>
+    <td>translate</td>
+    <td>@mod tr</td>
+    <td>@mod tr German tais-toi</td>
+    <td><em>Translate across 180+ languages</em></td>
   </tr>
 </table>
 
