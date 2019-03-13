@@ -21,16 +21,19 @@ SOFTWARE.
 import discord
 import random
 import asyncio
+import aiohttp
 import traceback
 import os
 import re
+try:
+    import psutil
+except ModuleNotFoundError:
+    pass
 
-from psutil import Process
-from discord.ext import commands
-from pathlib import Path
-from aiohttp import ClientSession
 from datetime import datetime
 from pytz import timezone
+from discord.ext import commands
+from pathlib import Path
 
 __version__ = '0.05.1'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
@@ -184,10 +187,10 @@ class ModBot(commands.Bot):
               f'  Logged as: {self.user}\n'
               f'  Monitoring: {self.guild.name}\n'
               '├─────────────────────────┤\n'
-              '│█████████████████░░░ 88% │\n'
+              '│██████████████████░░ 93% │\n'
               '└─────────────────────────┘\n')
 
-        status = "@Mod help | Snuff by Slipknot"
+        status = "@Mod help | Massachusetts Live by Slipknot 🔂"
         await self.change_presence(status=discord.Status.online,
                                    activity=discord.Activity(type=discord.ActivityType.listening,
                                                              name=status))
