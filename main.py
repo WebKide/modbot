@@ -25,6 +25,7 @@ import aiohttp
 import traceback
 import os
 import re
+import datetime
 try:
     import psutil
 except ModuleNotFoundError:
@@ -141,7 +142,7 @@ class ModBot(commands.Bot):
                 print(e)
 
     # +------------------------------------------------------------+
-    # |          Here the bot connects and loads cogs              |
+    # |            Here the bot connects and loads cogs            |
     # +------------------------------------------------------------+
     async def on_connect(self):
         """ If you see this in the logs, modbot is alive """
@@ -170,7 +171,7 @@ class ModBot(commands.Bot):
         return discord.utils.get(self.guilds)
 
     # +------------------------------------------------------------+
-    # |             If everything went well...                     |
+    # |            If everything went well...                      |
     # +------------------------------------------------------------+
     async def on_ready(self):
         """ If everything is fine, then... """
@@ -197,7 +198,7 @@ class ModBot(commands.Bot):
         msg = f'<:thonkingcool:540582184306606113> `Status set to:` Listening to **{status}** | `{self.ws.latency * 1000:.2f} ms`'
         await self.get_channel(status_loop_channel).send(msg)
         # ==================================================
-        #              Waking up message!
+        #            Waking up message!
         # ==================================================
         result = datetime.now(timezone('Europe/London')).strftime(f'**%a** %d %b, **%H**:%M:%S')
         txt = f'Websocket: `{self.ws.latency * 1000:.2f}` ms\n{result}'
@@ -211,7 +212,7 @@ class ModBot(commands.Bot):
                 pass
 
     # +------------------------------------------------------------+
-    # |               Cliché commands                              |
+    # |                Cliché commands                             |
     # +------------------------------------------------------------+
     @commands.command(description='Websocket latency')
     async def ping(self, ctx):
@@ -318,7 +319,7 @@ class ModBot(commands.Bot):
             return await ctx.send(z)
 
     # +------------------------------------------------------------+
-    # |               Bot Owner commands!                          |
+    # |                Bot Owner commands!                         |
     # +------------------------------------------------------------+
     @commands.command(description='Command for bot owner', hidden=True, no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
