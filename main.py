@@ -254,18 +254,21 @@ class ModBot(commands.Bot):
         text = len(text_channels)
         voice = len(voice_channels)
 
-        now = datetime.utcnow()
-        delta = now - datetime.fromisoformat('2019-02-04 06:15:23.496541')
-        hours, remainder = divmod(int(delta.total_seconds()), 3600)
-        minutes, seconds = divmod(remainder, 60)
-        days, hours = divmod(hours, 24)
-        weeks, days = divmod(days, 7)
-        fmt = '{h}h:{m}m:{s}s'
-        if days:
-            fmt = '{d}d ' + fmt
-        if weeks:
-            fmt = '{w}w ' + fmt
-        up_time = fmt.format(w=weeks, d=days, h=hours, m=minutes, s=seconds)
+        try:
+            now = datetime.utcnow()
+            delta = now - datetime.fromisoformat('2019-02-04 06:15:23.496541')
+            hours, remainder = divmod(int(delta.total_seconds()), 3600)
+            minutes, seconds = divmod(remainder, 60)
+            days, hours = divmod(hours, 24)
+            weeks, days = divmod(days, 7)
+            fmt = '{h}h:{m}m:{s}s'
+            if days:
+                fmt = '{d}d ' + fmt
+            if weeks:
+                fmt = '{w}w ' + fmt
+            up_time = fmt.format(w=weeks, d=days, h=hours, m=minutes, s=seconds)
+        except Exception:
+            up_time = 'datetime error'
 
         d = f'```css\n|⌄| _  _||_  _ |_ ™\n| |(_)(_||_)(_)⎩_ v.{__version__}\n\n[Changelog]: {__notes__}```'
         tnx = '```bf\nThank you for using Modbot, please report any issues or request features in Github```'
