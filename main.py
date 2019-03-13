@@ -213,23 +213,16 @@ class ModBot(commands.Bot):
     @commands.command(description='Websocket latency')
     async def ping(self, ctx):
         """ ✔ Websocket latency, Pong! """
-        x = ctx.message.author.id
         pong = f'Latency: **`{self.ws.latency * 1000:.2f}`** ms ᕙ(⇀‸↼‶)ᕗ'
 
         e = discord.Embed(color=0x7289da)
         e.description = pong
 
-        if x not in (dev[1] for dev in dev_list):
-            return
-
-        else:
-            try:
-                await ctx.message.add_reaction('\N{TABLE TENNIS PADDLE AND BALL}')
-                await ctx.send(embed=e)
-
-            except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                await ctx.channel.trigger_typing()
-                await ctx.send(pong)
+        try:
+            await ctx.message.add_reaction('\N{TABLE TENNIS PADDLE AND BALL}')
+            await ctx.send(embed=e)
+        except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
+            await ctx.send(pong)
 
     @commands.command(description='Modbot, a bot developed by WebKide', aliases=['bot', 'botto', 'info', 'invite'])
     async def about(self, ctx):
@@ -257,8 +250,8 @@ class ModBot(commands.Bot):
         text = len(text_channels)
         voice = len(voice_channels)
 
-        now = datetime.datetime.utcnow()
-        delta = now -  datetime.datetime(2019, 2, 4, 6, 15, 23, 79043)
+        now = datetime.utcnow()
+        delta = now - datetime.fromisoformat('2019-02-04 06:15:23.496541')
         hours, remainder = divmod(int(delta.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
