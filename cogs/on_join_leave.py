@@ -28,11 +28,9 @@ import random
 
 
 chosen_guilds = [
-    ('ssevana', 328341202103435264),
     ('Modbot Dev Support', 540072370527010841)
 ]
 bot_channel = 375179500604096512
-rolename1 = 'Listener'
 rolename2 = 'Member'
 
 
@@ -99,25 +97,6 @@ class OnJoinLeave:
         if guild.id not in (x[1] for x in chosen_guilds):
             return
 
-        if guild.id == 328341202103435264:  # ssevana
-            u = [s.name for s in bot.guilds]
-
-            # +------------------------------------------------------------+
-            # |           New member receives auto role                    |
-            # +------------------------------------------------------------+
-            role = discord.utils.find(lambda m: rolename1.lower() in m.name.lower(), member.guild.roles)
-            try:
-                await bot.get_channel(358429353966698500).send(f'Hi **{member.mention}** '
-                                                               f'\N{WAVING HAND SIGN}​ | `{member.id}`')
-                await member.add_roles(role)
-                await asyncio.sleep(369)
-                await bot.get_channel(358429353966698500).send(f'**​`{rolename1}​`** role added '
-                                                               f'to: *{member.display_name}*')
-
-            except Exception as e:
-                await bot.get_channel(bot_channel).send(f'yo, need perms to add {rolename1} role '
-                                                        f'to {member.mention}\n{e}', delete_after=69)
-
         # +------------------------------------------------------------+
         # |      Modbot Development Support                            |
         # +------------------------------------------------------------+
@@ -154,42 +133,6 @@ class OnJoinLeave:
 
         if g.id not in (x[1] for x in chosen_guilds):
             return
-
-        # +------------------------------------------------------------+
-        # |      ssevana                                               |
-        # +------------------------------------------------------------+
-        if g.id == 328341202103435264:  # ssevana
-            try:
-                avy = member.avatar_url
-            except discord.Forbidden:
-                avy = 'https://cdn.discordapp.com/embed/avatars/0.png'
-
-            try:
-                fooid = g.id
-                foo = g.name
-            except discord.Forbidden:
-                fooid = 'guild_id'
-                foo = 'guild_name'
-
-            try:
-                gav = g.icon_url
-            except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                gav = 'https://cdn.discordapp.com/embed/avatars/0.png'
-
-            e = discord.Embed(colour = discord.Colour(0xed791d)) # purple 0x423098
-            e.description = f'Another one bites the dust...'
-            e.set_author(name=f'Guild: {foo} | {fooid}', icon_url=gav)
-            e.set_thumbnail(url=avy)
-            e.timestamp = datetime.datetime.utcnow()
-            e.set_footer(text=f'{member.display_name} | {member.id}', icon_url=avy)
-            
-            await bot.get_channel(bot_channel).send(embed=e) # Temporary channel for testing purposes only! status
-
-            try:
-                await bot.get_channel(358429353966698500).send(f'Bye **{member.mention}** '
-                                                            f'\N{WAVING HAND SIGN}​ | `{member.id}`')
-            except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                pass
 
         # +------------------------------------------------------------+
         # |      Modbot Development Support                            |
