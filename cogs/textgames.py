@@ -182,7 +182,7 @@ class TextGame:
     @commands.command(description='Settle a dispute via coin toss', aliases=['toss'], no_pm=True)
     async def flip(self, ctx, *, something: str = None):
         """
-        Flips a coin... or some text
+        ✔ Flips a coin... or some text
         Defaults to coin toss.
         """
         h = 'https://media.discordapp.net/attachments/541059392951418880/556977776771596333/1926_heads.png'
@@ -298,7 +298,7 @@ class TextGame:
     # +------------------------------------------------------------+
     @commands.command()
     async def clap(self, ctx, *, msg: str = None):
-        """ Clap that message! """
+        """ ✔ Clap that message! """
         if msg is not None:
             text = msg.replace(' ', ' :clap: ')
             await ctx.send(text)
