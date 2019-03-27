@@ -23,7 +23,7 @@ import discord
 from discord.ext import commands
 
 
-class Mod:
+class Moderation:
     def __init__(self, bot):
         self.bot = bot
         self.mod_color = discord.Colour(0x7289da)  # Blurple
@@ -50,7 +50,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def kick(self, ctx, member: discord.Member, *, reason='Please write a reason!'):
-        """ Kick someone from the server """
+        """ ᗣ Kick someone from the server """
         if not member:
             return await ctx.send('ヽ( ･∀･)ﾉ┌┛Σ(ノ `Д´)ノ')
 
@@ -74,7 +74,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def ban(self, ctx, member: discord.Member, *, reason='Please write a reason!'):
-        """Ban someone from the server."""
+        """ ᗣ Ban someone from the server """
         if not member:
             return await ctx.send('(•̆ꈊ•̆;;)▁▂▃▅▆▓▒░')
 
@@ -98,7 +98,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def unban(self, ctx, name_or_id, *, reason=None):
-        """Unban someone from the server."""
+        """ ᗣ Unban someone from the server """
         if not name_or_id:
             return await ctx.send('、ヽ｀、ヽ｀个o(･･｡)｀ヽ、｀ヽ、')
 
@@ -124,9 +124,9 @@ class Mod:
     @commands.command(description='Ban using ID if they are no longer in server', no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def hackban(self, ctx, userid, *, reason='Please write a reason!'):
-        """ Ban someone after they left server """
+        """ ᗣ Ban user, even if not in server """
         if not userid:
-            return await ctx.send('(•̆ꈊ•̆;;)▁▂▃▅▆▓▒░')
+            return await ctx.send('To use this command, use User ID, and give a reason for ban.')
 
         if not reason:
             return await ctx.send(f'Gimme a good reason to (•̆ꈊ•̆;;)▁▂▃▅▆▓▒░ {member}')
@@ -160,7 +160,7 @@ class Mod:
     @commands.command(aliases=['del', 'p', 'prune'], bulk=True, no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def purge(self, ctx, limit: int):
-        """Clean a number of messages from chat"""
+        """ ᗣ Clean messages from chat """
         if not limit:
             return await ctx.send('Enter the number of messages you want me to delete.')
 
@@ -179,7 +179,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def clean(self, ctx, limit: int = 15):
-        """Clean a number of bot's messages only"""
+        """ ᗣ Clean a only Bot's messages """
         if not limit:
             return await ctx.send('Enter the number of messages you want me to delete. ˛˛(⊙﹏⊙ ) ̉ ̉')
 
@@ -197,7 +197,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def bans(self, ctx):
-        """ See a list of banned users """
+        """ ᗣ See a list of banned users """
         try:
             bans = await ctx.guild.bans()
         except:
@@ -219,7 +219,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def baninfo(self, ctx, *, name_or_id):
-        """ Check the reason of a ban """
+        """ ᗣ Check the reason of a ban """
         ban = await ctx.get_ban(name_or_id)
         e = discord.Embed(color=self.mod_color)
         e.set_author(name=str(ban.user), icon_url=ban.user.avatar_url)
@@ -235,7 +235,7 @@ class Mod:
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def addrole(self, ctx, member: discord.Member, *, rolename: str = None):
         """
-        Add a role to someone else
+        ᗣ Add a role to someone else
         Usage:
         addrole @name Listener
         """
@@ -262,7 +262,7 @@ class Mod:
     @commands.command(no_pm=True)
     @commands.has_any_role('Admin', 'Mod', 'Journalist', 'Owner')
     async def removerole(self, ctx, member: discord.Member, *, rolename: str):
-        """Remove a role from someone else."""
+        """ ᗣ Remove a role from someone """
         role = discord.utils.find(lambda m: rolename.lower() in m.name.lower(), ctx.message.guild.roles)
         if not role:
             return await ctx.send('That role does not exist. ╰(⇀ᗣ↼‶)╯')
@@ -275,4 +275,4 @@ class Mod:
 
 
 def setup(bot):
-    bot.add_cog(Mod(bot))
+    bot.add_cog(Moderation(bot))
