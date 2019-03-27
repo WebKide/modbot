@@ -105,6 +105,8 @@ class Evaluate:
     @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def _pyval(self, ctx, *, body: str):
         """ Evaluates a code """
+        if ctx.author.id not in (dev[1] for dev in dev_list):
+            return
 
         env = {
             'bot': self.bot,
@@ -173,6 +175,8 @@ class Evaluate:
     @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
     async def shell_access(self, ctx, *, cmd: str = None):
         """ ✯ Access commandline from text_channel """
+        if ctx.author.id not in (dev[1] for dev in dev_list):
+            return
         try:
             if cmd is None:
                 return
