@@ -304,7 +304,7 @@ class TextGame:
                 text = msg.replace(' ', ' :clap: ')
                 await ctx.send(text)
             else:
-                await ctx.send(':clap:')
+                await ctx.send(f':clap: {msg} :clap:')
 
         else:
             try:
