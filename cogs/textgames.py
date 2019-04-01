@@ -232,7 +232,7 @@ class TextGame:
                  'Random',
                  'A',
                  'Got this']
-        result = f'{random.choice(reply)} number from 1 to 108 is: **`{random.randint(1, 108)}`**'
+        result = f'{random.choice(reply)} number from 1 to 100 is: **`{random.randint(1, 99)}`**'
 
         e = discord.Embed(color=self.user_color)
         e.description = result
@@ -298,17 +298,20 @@ class TextGame:
     # +------------------------------------------------------------+
     @commands.command()
     async def clap(self, ctx, *, msg: str = None):
-        """ ✔ Clap that message! """
+        """ Clap that message! """
         if msg is not None:
-            text = msg.replace(' ', ' :clap: ')
-            await ctx.send(text)
+            if len(msg.split(' ')) > 1:
+                text = msg.replace(' ', ' :clap: ')
+                await ctx.send(text)
+            else:
+                await ctx.send(':clap:')
 
         else:
             try:
-                return await ctx.send(':clap:')
+                await ctx.send(':clap:')
             except discord.HTTPException as e:
                 if ctx.author.id == 323578534763298816:
-                    return await ctx.send(f'​`​`​`{e}​`​`​`', delete_after=15)
+                    await ctx.send(f'​`​`​`{e}​`​`​`', delete_after=15)
                 else:
                     pass
 
