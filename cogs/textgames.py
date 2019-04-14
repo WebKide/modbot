@@ -157,7 +157,7 @@ class TextGame:
 
             if any(x in options for x in valid_separators):
                 skd = options.replace(',', ', ').replace(' or ', ', ').replace('|', ', ') \
-                    .replace('.', ', ').replace('  ', ' ')
+                    .replace('.', ', ').replace('  ', ' ').replace('@', '')
                 picked = random.choice(skd.split(', '))
                 x = f'```ruby\nOptions:\n{skd}```\N{SMALL ORANGE DIAMOND} I choose: **`{picked}`**'
 
@@ -299,6 +299,7 @@ class TextGame:
     @commands.command()
     async def clap(self, ctx, *, msg: str = None):
         """ Clap that message! """
+        msg = msg.replace('@', '')
         if msg is not None:
             if len(msg.split(' ')) > 1:
                 text = msg.replace(' ', ' :clap: ')
