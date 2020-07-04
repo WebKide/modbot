@@ -9,7 +9,7 @@ lxml
 mtranslate
 parsedatetime
 Pillow
-psutil<5.3.2
+psutil>=5.6.6
 pyfiglet==0.7.5
 pyparsing==2.2.0
 pytz
