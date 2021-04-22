@@ -18,15 +18,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-import discord
-from discord.ext import commands
-import traceback
-import textwrap
-import aiohttp
-import asyncio
-import time
-import os
-import random
-import json
+import discord, traceback, textwrap, aiohttp, asyncio, time, os, random, json
 
 # This is just a placeholder for the commands in this cog
+class Welcome:
+    def __init__(self, bot):
+        self.bot = bot
+
+def setup(bot):
+    bot.add_cog(Welcome(bot))
