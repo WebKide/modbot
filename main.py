@@ -448,6 +448,8 @@ class ModBot(commands.Bot):
                     msg = f'Plugin **cogs/{cog}.py** unloaded'
                     await ctx.send(msg, delete_after=9)
 
-
+_token = os.environ.get('TOKEN')
 if __name__ == '__main__':
-    ModBot.run(os.environ.get('TOKEN'))
+    ModBot.run(_token, bot=True, reconnect=True)
+
+    
