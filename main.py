@@ -18,14 +18,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import discord
-import random
-import asyncio
-import aiohttp
-import traceback
-import os
-import re
-import datetime
+import discord, random, asyncio, aiohttp, traceback, os, re, datetime
 try:
     import psutil
 except ModuleNotFoundError:
@@ -146,8 +139,9 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     async def on_connect(self):
         """ If you see this in the logs, modbot is alive """
-        print('│   |⌵| _  _||_  _ |_ ™   │\n'
-              '│   | |(_)(_||_)(_)⎩_     │\n'
+        print('│   ╔╦╗┌─┐┌┬┐┌┐ ┌─┐┌┬┐ ™  │\n'
+              '│   ║║║│ │ ││├┴┐│ │ │     │\n'
+              '│   ╩ ╩└─┘─┴┘└─┘└─┘ ┴     │\n'
               '│                         │\n'
               '│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
               '│                         └\n'
@@ -454,4 +448,4 @@ class ModBot(commands.Bot):
 
 
 if __name__ == '__main__':
-    ModBot.init()
+    ModBot.run()
