@@ -115,6 +115,7 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     # |             Here we get the bot's TOKEN                    |
     # +------------------------------------------------------------+
+    '''
     @property
     def heroku_token(self):
         """ Return Modbot's token from Heroku """
@@ -133,6 +134,7 @@ class ModBot(commands.Bot):
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
                 print(e)
+                '''
 
     # +------------------------------------------------------------+
     # |            Here the bot connects and loads cogs            |
@@ -448,4 +450,4 @@ class ModBot(commands.Bot):
 
 
 if __name__ == '__main__':
-    ModBot.run()
+    ModBot.run(os.environ.get('TOKEN'))
