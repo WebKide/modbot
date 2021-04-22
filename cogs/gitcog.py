@@ -1,1 +1,3 @@
-4jr where are you? need this, can I use?
+# @4jr where are you? need this, can I use?
+import discord
+
