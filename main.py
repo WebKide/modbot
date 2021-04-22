@@ -450,6 +450,6 @@ class ModBot(commands.Bot):
 
 _token = os.environ.get('TOKEN')
 if __name__ == '__main__':
-    ModBot.run(_token, bot=True, reconnect=True)
+    ModBot.init(_token, bot=True, reconnect=True)
 
     
