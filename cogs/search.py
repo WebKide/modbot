@@ -1,18 +1,14 @@
-import asyncio
-import discord
-import json
+import asyncio, discord, json
 
 from discord.ext import commands
 from bs4 import BeautifulSoup
-from urllib.parse import quote_plus
-from urllib.parse import urlparse
-from urllib.parse import parse_qs
+from urllib.parse import quote_plus, urlparse, parse_qs
 
 
 class Search:
     def __init__(self, bot):
         self.bot = bot
-        self.session = bot.session
+        self.session = self.bot.session
         self.url = 'https://google.com/search'
         self.headers = {
             'User-Agent': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR '
