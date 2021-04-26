@@ -214,10 +214,11 @@ class ModBot(commands.Bot):
             return await ctx.send(z)
 
 def main():
-    """ ModBot, get ready! """
+    """ ModBot, is ready! """
     bot = ModBot()
+    bot.run(bot, __token__, reconnect=True)
 
     
 if __name__ == "__main__":
-    main.run(bot, __token__, reconnect=True)
+    main()
 
