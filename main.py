@@ -213,8 +213,11 @@ class ModBot(commands.Bot):
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
             return await ctx.send(z)
 
+def main():
+    """ ModBot, get ready! """
+    bot = ModBot()
 
+    
 if __name__ == "__main__":
-    modbot = ModBot()
-    bot.run(modbot, __token__, reconnect=True)
+    main.run(bot, __token__, reconnect=True)
 
