@@ -82,12 +82,12 @@ class ModBot(commands.Bot):
         print(f'│        v.{__version__}          │')
         print('│           ◜◝             │')
 
-        for plugin in cogs or self._extensions:
+        for extension in cogs or self._extensions:
             try:
-                self.load_extension(f'{path}{plugin}')
-            except Exception:
-            #  except plugin is None:  # if it cannot find them, it passes silently
-                pass
+                self.load_extension(f'{path}{extension}')
+                print(f'├ ✔ Loaded Plugin: {extension}')
+            except Exception as e:
+                traceback.print_exc()
             
     # +------------------------------------------------------------+
     # |            Here the bot connects and loads cogs            |
