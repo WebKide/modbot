@@ -222,5 +222,5 @@ def main(bot):
     
     
 if __name__ == '__main__':
-    ModBot.main()
+    main()
 
