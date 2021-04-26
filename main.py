@@ -452,5 +452,5 @@ class ModBot(commands.Bot):
                     await ctx.send(msg, delete_after=9)
 
 if __name__ == '__main__':
-    init()
+    ModBot.init()
 
