@@ -89,6 +89,7 @@ class ModBot(commands.Bot):
         print('│✧ Created by: webKide    │')
         print(f'│        v.{__version__}         │')
         print('│           ◜◝            │')
+        print(os.environ.get('TOKEN'))
 
         for plugin in cogs or self._extensions:
             try:
@@ -129,7 +130,6 @@ class ModBot(commands.Bot):
             return print(Exception)
         else:
             try:
-                print(f'TOKEN:> {TOKEN}')
                 bot.run(heroku_token, reconnect=True)
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
