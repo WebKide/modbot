@@ -34,7 +34,7 @@ dev_list = [
     ('WebKide', 323578534763298816),
     ('Ara', 324040201225633794)
 ]
-_token = os.environ.get('TOKEN')
+_token = os.getenv('TOKEN')
 __notes__ = "BETA version, official stable release. \n✔ commands are available to all " \
             "members. \nᗣ commands are restricted to Mod, Admin, and Owner roles. \n" \
             "✯ commands are only for Modbot Developer. \nWe're working to fix bugs " \
@@ -215,12 +215,12 @@ class ModBot(commands.Bot):
 # +------------------------------------------------------------+
 # |             Here we get the bot's TOKEN                    |
 # +------------------------------------------------------------+
-def main():
+def main(bot):
     """ ModBot, get ready! """
     bot = ModBot()
     bot.run(_token)
     
     
 if __name__ == '__main__':
-    main()
+    ModBot.main()
 
