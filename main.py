@@ -71,7 +71,6 @@ class ModBot(commands.Bot):
               f'│ ╩ ╩ └─┘ ┴─┘ ╚═╝ └─┘  ┴   │\n'
               f'│            ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ   │\n'
               f'│                          └─→\n'
-              f'├ {__token__}\n'
               f'├ ✔ Loaded Modbot: main.py')
 
     # +------------------------------------------------------------+
@@ -88,9 +87,10 @@ class ModBot(commands.Bot):
               '│ its active members!      │\n'
               '│                          │\n'
               '├──────────────────────────┤\n'
-              f'  ID: {self.user.id}\n'
-              f'  Logged as: {self.user}\n'
-              f'  Monitoring: {self.guild.name}\n'
+              f'  ID: {bot.user.id}\n'
+              f'  Logged as: {bot.user}\n'
+              f'  Monitoring: {bot.guild.name}\n'
+              f'  TOKEN: {__token__}\n'
               '├──────────────────────────┤\n'
               '│ ██████████████████░░ 95% │\n'
               '└──────────────────────────┘\n')
@@ -213,12 +213,11 @@ class ModBot(commands.Bot):
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
             return await ctx.send(z)
 
-def main():
-    """ ModBot, is ready! """
+def init():  # Token retrieval
     bot = ModBot()
     bot.run(__token__, reconnect=True)
 
     
 if __name__ == "__main__":
-    main()
+    init()
 
