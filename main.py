@@ -1,6 +1,6 @@
 """
 MIT License
-Copyright (c) 2019 WebKide [d.id @323578534763298816]
+Copyright (c) 2019-2021 WebKide [d.id @323578534763298816]
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -124,12 +124,12 @@ class ModBot(commands.Bot):
     def init(bot):
         """ ModBot, get ready! """
         bot = bot()
-        heroku_token = TOKEN or None
+        heroku_token = None
         if heroku_token is None:
             return print(Exception)
         else:
             try:
-                bot.run(heroku_token, reconnect=True)
+                bot.run(self.run, reconnect=True)  # heroku_token
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
                 print(e)
@@ -144,7 +144,7 @@ class ModBot(commands.Bot):
               '│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
               '│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
               '│                         └\n'
-              f'{os.environ.get('TOKEN')}\n'
+              f'{self.run}\n'
               '├ ✔ Loaded Modbot: main.py')
 
         for ext in self.startup_ext:
