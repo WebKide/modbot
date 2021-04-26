@@ -212,9 +212,11 @@ class ModBot(commands.Bot):
         total_unique = len(b.users)
 
         join_number = sorted(g.members, key=lambda m: m.joined_at).index(self.user) + 1
-        # memory_usage = self.process.memory_full_info().uss / 1024 ** 2 or '0.0'
-        # cpu_usage = f'{self.process.cpu_percent() / psutil.cpu_count():.2}%' or 'Unkwown'
-
+        try:    memory_usage = self.process.memory_full_info().uss / 1024 ** 2 or '0.0'
+        except Exception:    pass
+        try:    cpu_usage = f'{self.process.cpu_percent() / psutil.cpu_count():.2}%' or 'Unkwown'
+        except Exception:    pass
+        
         voice_channels = []
         text_channels = []
         for guild in b.guilds:
@@ -282,7 +284,7 @@ class ModBot(commands.Bot):
 
             try:    e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
                                 value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n{tnx}')
-            except:    pass
+            except Exception:    pass
             
             e.add_field(name='<:geekpengu:540582046486102027> Geek stats', value=f'Processes: currently unavailable')
 
