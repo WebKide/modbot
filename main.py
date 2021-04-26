@@ -109,28 +109,6 @@ class ModBot(commands.Bot):
     def guild_id(self):    return int(os.environ.get('GUILD_ID')) if from_heroku else GUILD_ID
     @property
     def log_chan_id(self):    return int(os.environ.get('LOG_CHAN_ID')) if from_heroku else LOG_CHAN_ID'''
-    
-    # +------------------------------------------------------------+
-    # |             Here we get the bot's TOKEN                    |
-    # +------------------------------------------------------------+
-    @property
-    def heroku_token(self):
-        """ Return Modbot's token from Heroku """
-        return os.environ.get('TOKEN') or None
-
-    @classmethod
-    def main():
-        """ ModBot, get ready! """
-        bot = ModBot()
-        heroku_token = os.getenv('TOKEN') or None
-        if heroku_token is None:
-            return print(Exception)
-        else:
-            try:
-                bot.run()
-            except Exception as e:
-                print('├ !-- Missing TOKEN in Heroku Config')
-                print(e)
 
     # +------------------------------------------------------------+
     # |            Here the bot connects and loads cogs            |
@@ -444,7 +422,15 @@ class ModBot(commands.Bot):
                 except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
                     msg = f'Plugin **cogs/{cog}.py** unloaded'
                     await ctx.send(msg, delete_after=9)
-
+    
+# +------------------------------------------------------------+
+# |             Here we get the bot's TOKEN                    |
+# +------------------------------------------------------------+
+def main():
+    """ ModBot, get ready! """
+    bot = ModBot()
+    bot.run()
+        
 if __name__ == '__main__':
-    ModBot.main()
+    main()
 
