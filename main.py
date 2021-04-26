@@ -70,15 +70,19 @@ class ModBot(commands.Bot):
         self.add_command(self.unload)
         self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
-        self.run(os.getenv('TOKEN').strip('\"'))
+        # self.run(os.getenv('TOKEN').strip('\"'))
         self.version = __version__
         self.load_extensions()  # automatically loads plugins inside /cogs/
         self.loop.create_task(self.periodic_presence_change())  # create presence-loop
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
-        # self.process = psutil.Process()  # to monitor RAM and space
         self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
         # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
+        try:
+            self.process = psutil.Process()  # to monitor RAM and space
+        except:
+            pass
+        
 
     # +------------------------------------------------------------+
     # |         Here we load the cogs onto the bot                 |
