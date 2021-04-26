@@ -89,7 +89,6 @@ class ModBot(commands.Bot):
         print('│✧ Created by: webKide    │')
         print(f'│        v.{__version__}         │')
         print('│           ◜◝            │')
-        print(os.environ.get('TOKEN'))
 
         for plugin in cogs or self._extensions:
             try:
@@ -145,6 +144,7 @@ class ModBot(commands.Bot):
               '│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
               '│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
               '│                         └\n'
+              f'{os.environ.get('TOKEN')}\n'
               '├ ✔ Loaded Modbot: main.py')
 
         for ext in self.startup_ext:
