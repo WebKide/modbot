@@ -78,8 +78,6 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     async def on_ready(self):
         """ If everything is fine, then... """
-        try:    x = bot or self or self.bot
-        except Exception:    x = 'Null'
         print('│                          ┌─→\n'
               '│  (∩｀-´)⊃━✧｀｀｀｀｀｀ ♡  │\n'
               '│                          │\n'
@@ -89,9 +87,6 @@ class ModBot(commands.Bot):
               '│ its active members!      │\n'
               '│                          │\n'
               '├──────────────────────────┤\n'
-              f'  ID: {x.user.id}\n'
-              f'  Logged as: {x.user}\n'
-              f'  Monitoring: {x.guild.name}\n'
               f'  TOKEN: {__token__}\n'
               '├──────────────────────────┤\n'
               '│ ██████████████████░░ 95% │\n'
