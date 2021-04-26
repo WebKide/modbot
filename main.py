@@ -105,17 +105,11 @@ class ModBot(commands.Bot):
     # |         Here is where the prefix is defined                |
     # |         need to fix heroku variable feature                |
     # +------------------------------------------------------------+
-    '''
+    '''@property
+    def guild_id(self):    return int(os.environ.get('GUILD_ID')) if from_heroku else GUILD_ID
     @property
-    def guild_id(self):
-        from_heroku = os.environ.get('GUILD_ID')
-        return int(from_heroku) if from_heroku else GUILD_ID
-
-    @property
-    def log_chan_id(self):
-        from_heroku = os.environ.get('LOG_CHAN_ID')
-        return int(from_heroku) if from_heroku else LOG_CHAN_ID
-    '''
+    def log_chan_id(self):    return int(os.environ.get('LOG_CHAN_ID')) if from_heroku else LOG_CHAN_ID'''
+    
     # +------------------------------------------------------------+
     # |             Here we get the bot's TOKEN                    |
     # +------------------------------------------------------------+
@@ -133,7 +127,7 @@ class ModBot(commands.Bot):
             return print(Exception)
         else:
             try:
-                bot.run(heroku_token)
+                bot.run()
             except Exception as e:
                 print('├ !-- Missing TOKEN in Heroku Config')
                 print(e)
