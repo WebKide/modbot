@@ -140,7 +140,7 @@ class ModBot(commands.Bot):
     async def on_connect(self):
         """ Once you see this in the logs, modbot is alive """
         try:
-            tkn = return os.getenv('TOKEN')
+            tkn = os.getenv('TOKEN')
         except Exception as e:
             tkn = e
         print(f'│   ╔╦╗┌─┐┌┬┐╔╗ ┌─┐┌┬┐ ™  │\n'
