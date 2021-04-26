@@ -125,7 +125,7 @@ class ModBot(commands.Bot):
         return os.environ.get('TOKEN') or None
 
     @classmethod
-    def init():
+    def main():
         """ ModBot, get ready! """
         bot = ModBot()
         heroku_token = os.getenv('TOKEN') or None
@@ -133,9 +133,9 @@ class ModBot(commands.Bot):
             return print(Exception)
         else:
             try:
-                bot.run(heroku_token, reconnect=True)
+                bot.run(heroku_token)
             except Exception as e:
-                print(f'├ !-- Missing TOKEN in Heroku')
+                print('├ !-- Missing TOKEN in Heroku Config')
                 print(e)
 
     # +------------------------------------------------------------+
@@ -452,5 +452,5 @@ class ModBot(commands.Bot):
                     await ctx.send(msg, delete_after=9)
 
 if __name__ == '__main__':
-    ModBot.init()
+    ModBot.main()
 
