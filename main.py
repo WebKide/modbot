@@ -29,10 +29,10 @@ from pytz import timezone
 from discord.ext import commands
 from pathlib import Path
 
-__version__ = '0.06.2'  # first int is main, second is stable, third is working release [0.00.0]
+__version__ = '0.06.8'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
     ('WebKide', 323578534763298816),
-    ('Kybre', 325012556940836864)
+    ('Ara', 324040201225633794)
 ]
 _token = os.environ.get('TOKEN')
 status_loop_channel = 545719518903926807  # status-loop channel in dev-server
@@ -134,10 +134,10 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     # |    For the time being, Modbot works on single guild only   |
     # +------------------------------------------------------------+
-    @property
+    '''@property
     def guild(self):
         """ Guild monitored by Modbot """
-        return discord.utils.get(self.guilds)
+        return discord.utils.get(self.guilds)'''
 
     # +------------------------------------------------------------+
     # |            If everything went well...                      |
@@ -164,7 +164,7 @@ class ModBot(commands.Bot):
         await self.change_presence(status=discord.Status.online,
                                    activity=discord.Activity(type=discord.ActivityType.listening,
                                                              name=status))
-        msg = f'<:thonkingcool:540582184306606113> `Status set to:` Listening to **{status}** | `{self.ws.latency * 1000:.2f} ms`'
+        '''msg = f'<:thonkingcool:540582184306606113> `Status set to:` Listening to **{status}** | `{self.ws.latency * 1000:.2f} ms`'
         await self.get_channel(status_loop_channel).send(msg)
         # ==================================================
         #            Waking up message!
@@ -178,7 +178,7 @@ class ModBot(commands.Bot):
             try:
                 await self.get_channel(gen_chan).send(txt)
             except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                pass
+                pass'''
 
     # +------------------------------------------------------------+
     # |                Cliché commands                             |
@@ -280,9 +280,10 @@ class ModBot(commands.Bot):
                         value=f'`{total_online}` online\n'
                               f'`{total_idle}` idle\n`{total_dnd}` dnd\n `{total_offline}` offline')
 
-            # e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
-            #                      value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n'
-            #                                  f'{tnx}')
+            try:    e.add_field(name='<:geekpengu:540582046486102027> Geek stats',
+                                value=f'Processes: `{memory_usage:.2}` MiB | `{cpu_usage}` CPU\n{tnx}')
+            except:    pass
+            
             e.add_field(name='<:geekpengu:540582046486102027> Geek stats', value=f'Processes: currently unavailable')
 
             return await ctx.send(embed=e)
