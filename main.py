@@ -214,5 +214,6 @@ class ModBot(commands.Bot):
 
 
 if __name__ == "__main__":
+    bot = ModBot()
     ModBot.run(bot, reconnect=True)
 
