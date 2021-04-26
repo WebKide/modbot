@@ -34,12 +34,14 @@ dev_list = [
     ('WebKide', 323578534763298816),
     ('Kybre', 325012556940836864)
 ]
+_token = os.environ.get('TOKEN')
 status_loop_channel = 545719518903926807  # status-loop channel in dev-server
 activity_list = ['you', 'this server', 'everything', 'new members', 'Anime', 'hentai', 'yo mama']
 __notes__ = "BETA version, official stable release. \n✔ commands are available to all " \
             "members. \nᗣ commands are restricted to Mod, Admin, and Owner roles. \n" \
             "✯ commands are only for Modbot Developer. \nWe're working to fix bugs " \
             "and add more functionality, thanks for your patience."
+intents = discord.Intents.all()
 
 
 # +------------------------------------------------------------+
@@ -61,7 +63,8 @@ class ModBot(commands.Bot):
         self.description = f'|⌄| _  _||_  _ |_ ™\n| |(_)(_||_)(_)⎩_ v.{__version__}\n\n{__notes__}'
         self.ownerID = 323578534763298816
         super().__init__(command_prefix=commands.when_mentioned_or('botto ', '.', 'modbot '),
-                         case_insensitive=True, owner_id=self.ownerID, description=self.description, **attrs)
+                         case_insensitive=True, owner_id=self.ownerID, intents=intents, 
+                         description=self.description, **attrs)
         self.add_command(self.ping)
         self.add_command(self.about)
         self.add_command(self.restart)  # hidden cmd
@@ -70,7 +73,7 @@ class ModBot(commands.Bot):
         self.add_command(self.unload)
         self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
-        self.run(os.getenv('TOKEN'))  # self.run(os.getenv('TOKEN').strip('\"'))
+        # self.run(os.getenv('TOKEN').strip('\"'))
         self.version = __version__
         self.load_extensions()  # automatically loads plugins inside /cogs/
         self.loop.create_task(self.periodic_presence_change())  # create presence-loop
@@ -427,7 +430,7 @@ class ModBot(commands.Bot):
 def main():
     """ ModBot, get ready! """
     bot = ModBot()
-    bot.run()
+    bot.run(_token)
     
     
 if __name__ == '__main__':
