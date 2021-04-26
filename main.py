@@ -29,7 +29,7 @@ from pytz import timezone
 from discord.ext import commands
 from pathlib import Path
 
-__version__ = '0.05.1'  # first int is main, second is stable, third is working release [0.00.0]
+__version__ = '0.06.2'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
     ('WebKide', 323578534763298816),
     ('Kybre', 325012556940836864)
@@ -61,7 +61,8 @@ class ModBot(commands.Bot):
         self.description = f'|⌄| _  _||_  _ |_ ™\n| |(_)(_||_)(_)⎩_ v.{__version__}\n\n{__notes__}'
         self.ownerID = 323578534763298816
         super().__init__(command_prefix=commands.when_mentioned_or('botto ', '.', 'modbot '),
-                         description=self.description, owner_id=self.ownerID, **attrs)
+                         case_insensitive=True, intents=intents, owner_id=self.ownerID, 
+                         description=self.description, **attrs)
         self.add_command(self.ping)
         self.add_command(self.about)
         self.add_command(self.restart)  # hidden cmd
@@ -115,7 +116,6 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     # |             Here we get the bot's TOKEN                    |
     # +------------------------------------------------------------+
-    '''
     @property
     def heroku_token(self):
         """ Return Modbot's token from Heroku """
@@ -134,17 +134,15 @@ class ModBot(commands.Bot):
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
                 print(e)
-                '''
 
     # +------------------------------------------------------------+
     # |            Here the bot connects and loads cogs            |
     # +------------------------------------------------------------+
     async def on_connect(self):
-        """ If you see this in the logs, modbot is alive """
-        print('│   ╔╦╗┌─┐┌┬┐┌┐ ┌─┐┌┬┐ ™  │\n'
-              '│   ║║║│ │ ││├┴┐│ │ │     │\n'
-              '│   ╩ ╩└─┘─┴┘└─┘└─┘ ┴     │\n'
-              '│                         │\n'
+        """ Once you see this in the logs, modbot is alive """
+        print('│   ╔╦╗┌─┐┌┬┐╔╗ ┌─┐┌┬┐ ™  │\n'
+              '│   ║║║│ │ ││╠╩╗│ │ │     │\n'
+              '│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
               '│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
               '│                         └\n'
               '├ ✔ Loaded Modbot: main.py')
@@ -187,7 +185,7 @@ class ModBot(commands.Bot):
               '│██████████████████░░ 93% │\n'
               '└─────────────────────────┘\n')
 
-        status = "@Mod help | Massachusetts Live by Slipknot 🔂"
+        status = "@Mod help | Spotify"
         await self.change_presence(status=discord.Status.online,
                                    activity=discord.Activity(type=discord.ActivityType.listening,
                                                              name=status))
@@ -448,8 +446,8 @@ class ModBot(commands.Bot):
                     msg = f'Plugin **cogs/{cog}.py** unloaded'
                     await ctx.send(msg, delete_after=9)
 
-_token = os.environ.get('TOKEN')
+#  _token = os.environ.get('TOKEN')
 if __name__ == '__main__':
-    ModBot.init(_token, bot=True, reconnect=True)
+    ModBot.init()  #_token, bot=True, reconnect=True)
 
     
