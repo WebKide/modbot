@@ -61,8 +61,7 @@ class ModBot(commands.Bot):
         self.description = f'|⌄| _  _||_  _ |_ ™\n| |(_)(_||_)(_)⎩_ v.{__version__}\n\n{__notes__}'
         self.ownerID = 323578534763298816
         super().__init__(command_prefix=commands.when_mentioned_or('botto ', '.', 'modbot '),
-                         case_insensitive=True, intents=intents, owner_id=self.ownerID, 
-                         description=self.description, **attrs)
+                         case_insensitive=True, owner_id=self.ownerID, description=self.description, **attrs)
         self.add_command(self.ping)
         self.add_command(self.about)
         self.add_command(self.restart)  # hidden cmd
