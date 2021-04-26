@@ -1,7 +1,5 @@
 from __future__ import division
-import discord
-import math
-import operator
+import discord, math, operator
 
 from discord.ext import commands
 from pyparsing import (Literal,CaselessLiteral,Word,Combine,Group,Optional,
