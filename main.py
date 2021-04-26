@@ -85,10 +85,10 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     def load_extensions(self, cogs=None, path='cogs.'):
         """ Start loading plugins from /cogs/ """
-        print('\n\n\n┌─────────▿▿▿▿▿▿──────────┐')
-        print('│✧ Created by: webKide    │')
-        print(f'│        v.{__version__}         │')
-        print('│           ◜◝            │')
+        print('\n\n\n┌──────────▿▿▿▿▿▿──────────┐')
+        print('│✧ Created by: webKide     │')
+        print(f'│        v.{__version__}          │')
+        print('│           ◜◝             │')
 
         for plugin in cogs or self._extensions:
             try:
@@ -121,15 +121,15 @@ class ModBot(commands.Bot):
         return os.environ.get('TOKEN') or None
 
     @classmethod
-    def init(bot):
+    def init():
         """ ModBot, get ready! """
-        bot = bot()
+        bot = ModBot()
         heroku_token = os.getenv('TOKEN') or None
         if heroku_token is None:
             return print(Exception)
         else:
             try:
-                bot.run(heroku_token, reconnect=True)  # heroku_token
+                bot.run(heroku_token, reconnect=True)
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
                 print(e)
@@ -139,15 +139,12 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     async def on_connect(self):
         """ Once you see this in the logs, modbot is alive """
-        try:
-            tkn = os.getenv('TOKEN')
-        except Exception as e:
-            tkn = e
-        print(f'│   ╔╦╗┌─┐┌┬┐╔╗ ┌─┐┌┬┐ ™  │\n'
-              f'│   ║║║│ │ ││╠╩╗│ │ │     │\n'
-              f'│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
-              f'│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
-              f'│                         └\n'
+        tkn = os.getenv('TOKEN')
+        print(f'│ ╔╦╗ ┌─┐ ┬─╮ ╔╗  ┌─┐ ┌┬┐™ │\n'
+              f'│ ║║║ │ │ │ │ ╠╩╗ │ │  │   │\n'
+              f'│ ╩ ╩ └─┘ ┴─┘ ╚═╝ └─┘  ┴   │\n'
+              f'│            ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ   │\n'
+              f'│                          └─→\n'
               f'├ TOKEN: {tkn} \n'
               f'├ ✔ Loaded Modbot: main.py')
 
@@ -173,21 +170,21 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     async def on_ready(self):
         """ If everything is fine, then... """
-        print('│                         ┌\n'
-              '│  (∩｀-´)⊃━✧｀｀｀｀｀｀ ♡ │\n'
-              '│                         │\n'
-              '│ Your instance of ModBot │\n'
-              '│ is ready to watch over  │\n'
-              '│ your Discord guild and  │\n'
-              '│ its active members!     │\n'
-              '│                         │\n'
-              '├─────────────────────────┤\n'
+        print('│                          ┌─→\n'
+              '│  (∩｀-´)⊃━✧｀｀｀｀｀｀ ♡  │\n'
+              '│                          │\n'
+              '│ Your instance of ModBot  │\n'
+              '│ is ready to watch over   │\n'
+              '│ your Discord guild and   │\n'
+              '│ its active members!      │\n'
+              '│                          │\n'
+              '├──────────────────────────┤\n'
               f'  ID: {self.user.id}\n'
               f'  Logged as: {self.user}\n'
               f'  Monitoring: {self.guild.name}\n'
-              '├─────────────────────────┤\n'
-              '│██████████████████░░ 93% │\n'
-              '└─────────────────────────┘\n')
+              '├──────────────────────────┤\n'
+              '│ ██████████████████░░ 95% │\n'
+              '└──────────────────────────┘\n')
 
         status = "@Mod help | Spotify"
         await self.change_presence(status=discord.Status.online,
@@ -450,8 +447,6 @@ class ModBot(commands.Bot):
                     msg = f'Plugin **cogs/{cog}.py** unloaded'
                     await ctx.send(msg, delete_after=9)
 
-#  _token = os.environ.get('TOKEN')
 if __name__ == '__main__':
-    ModBot.init()  #_token, bot=True, reconnect=True)
+    init()
 
-    
