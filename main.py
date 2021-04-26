@@ -212,7 +212,7 @@ class ModBot(commands.Bot):
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
             return await ctx.send(z)
 
-    @classmethod
+    @property
     def init(ModBot):
         bot.run()
 
