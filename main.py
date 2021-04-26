@@ -73,7 +73,7 @@ class ModBot(commands.Bot):
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
         self.version = __version__
         self.load_extensions()  # automatically loads plugins inside /cogs/
-        self.loop.create_task(self.periodic_presence_change())  # create presence-loop
+        # self.loop.create_task(self.periodic_presence_change())
         self.mod_color = discord.Colour(0x7289da)  # Blurple
         self.user_color = discord.Colour(0xed791d)  # Orange
         self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
