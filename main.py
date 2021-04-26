@@ -124,12 +124,12 @@ class ModBot(commands.Bot):
     def init(bot):
         """ ModBot, get ready! """
         bot = bot()
-        heroku_token = None
+        heroku_token = os.getenv('TOKEN') or None
         if heroku_token is None:
             return print(Exception)
         else:
             try:
-                bot.run(self.run, reconnect=True)  # heroku_token
+                bot.run(heroku_token, reconnect=True)  # heroku_token
             except Exception as e:
                 print(f'├ !-- Missing TOKEN in Heroku')
                 print(e)
@@ -139,13 +139,17 @@ class ModBot(commands.Bot):
     # +------------------------------------------------------------+
     async def on_connect(self):
         """ Once you see this in the logs, modbot is alive """
-        print('│   ╔╦╗┌─┐┌┬┐╔╗ ┌─┐┌┬┐ ™  │\n'
-              '│   ║║║│ │ ││╠╩╗│ │ │     │\n'
-              '│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
-              '│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
-              '│                         └\n'
-              f'{self.run}\n'
-              '├ ✔ Loaded Modbot: main.py')
+        try:
+            tkn = return os.getenv('TOKEN')
+        except Exception as e:
+            tkn = e
+        print(f'│   ╔╦╗┌─┐┌┬┐╔╗ ┌─┐┌┬┐ ™  │\n'
+              f'│   ║║║│ │ ││╠╩╗│ │ │     │\n'
+              f'│   ╩ ╩└─┘─┴┘╚═╝└─┘ ┴     │\n'
+              f'│          ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ    │\n'
+              f'│                         └\n'
+              f'├ TOKEN: {tkn} \n'
+              f'├ ✔ Loaded Modbot: main.py')
 
         for ext in self.startup_ext:
             try:
