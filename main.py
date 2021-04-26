@@ -85,8 +85,8 @@ class ModBot(commands.Bot):
         for plugin in cogs or self._extensions:
             try:
                 self.load_extension(f'{path}{plugin}')
-            # except Exception:
-            except plugin is None:  # if it cannot find them, it passes silently
+            except Exception:
+            #  except plugin is None:  # if it cannot find them, it passes silently
                 pass
             
     # +------------------------------------------------------------+
