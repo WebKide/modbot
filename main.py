@@ -35,8 +35,6 @@ dev_list = [
     ('Ara', 324040201225633794)
 ]
 _token = os.environ.get('TOKEN')
-status_loop_channel = 545719518903926807  # status-loop channel in dev-server
-activity_list = ['you', 'this server', 'everything', 'new members', 'Anime', 'hentai', 'yo mama']
 __notes__ = "BETA version, official stable release. \n✔ commands are available to all " \
             "members. \nᗣ commands are restricted to Mod, Admin, and Owner roles. \n" \
             "✯ commands are only for Modbot Developer. \nWe're working to fix bugs " \
@@ -48,13 +46,6 @@ __notes__ = "BETA version, official stable release. \n✔ commands are available
 # +------------------------------------------------------------+
 class ModBot(commands.Bot):
     """ a moderation bot for Discord guilds """
-    _mentions_transforms = {
-        '@everyone': '@\u200beveryone',
-        '@here': '@\u200bhere'
-    }
-
-    _mention_pattern = re.compile('|'.join(_mentions_transforms.keys()))
-
     # +------------------------------------------------------------+
     # |             Here starts the actual bot                     |
     # +------------------------------------------------------------+
@@ -65,50 +56,10 @@ class ModBot(commands.Bot):
                          case_insensitive=True, owner_id=self.ownerID, description=self.description, **attrs)
         self.add_command(self.ping)
         self.add_command(self.about)
-        self.add_command(self.restart)  # hidden cmd
-        self.add_command(self.load)
-        self.add_command(self.reload)
-        self.add_command(self.unload)
-        self.startup_ext = [x.stem for x in Path('cogs').glob('*.py')]
-        self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
+
         self.version = __version__
-        self.load_extensions()  # automatically loads plugins inside /cogs/
-        # self.loop.create_task(self.periodic_presence_change())
-        self.mod_color = discord.Colour(0x7289da)  # Blurple
-        self.user_color = discord.Colour(0xed791d)  # Orange
-        self.session = None or aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
-        # self.session = aiohttp.ClientSession(loop=self.loop, headers={'User-Agent' : 'ModBot Discord'})
-        try:
-            self.process = psutil.Process()  # to monitor RAM and space
-        except:
-            pass
-        
-
-    # +------------------------------------------------------------+
-    # |         Here we load the cogs onto the bot                 |
-    # +------------------------------------------------------------+
-    def load_extensions(self, cogs=None, path='cogs.'):
-        """ Start loading plugins from /cogs/ """
-        print('\n\n\n┌──────────▿▿▿▿▿▿──────────┐')
-        print('│✧ Created by: webKide     │')
-        print(f'│        v.{__version__}          │')
-        print('│           ◜◝             │')
-
-        for plugin in cogs or self._extensions:
-            try:
-                self.load_extension(f'{path}{plugin}')
-            # except Exception:
-            except plugin is None:  # if it cannot find them, it passes silently
-                pass
-
-    # +------------------------------------------------------------+
-    # |         Here is where the prefix is defined                |
-    # |         need to fix heroku variable feature                |
-    # +------------------------------------------------------------+
-    '''@property
-    def guild_id(self):    return int(os.environ.get('GUILD_ID')) if from_heroku else GUILD_ID
-    @property
-    def log_chan_id(self):    return int(os.environ.get('LOG_CHAN_ID')) if from_heroku else LOG_CHAN_ID'''
+        try:    self.process = psutil.Process()  # to monitor RAM and space
+        except Exception:    pass
 
     # +------------------------------------------------------------+
     # |            Here the bot connects and loads cogs            |
@@ -121,23 +72,6 @@ class ModBot(commands.Bot):
               f'│            ᶠᵒʳ ᵈⁱˢᶜᵒʳᵈ   │\n'
               f'│                          └─→\n'
               f'├ ✔ Loaded Modbot: main.py')
-
-        for ext in self.startup_ext:
-            try:
-                self.load_extension(f'cogs.{ext}')
-            except Exception as e:
-                print(f'├ ✖ E R R O R  w/: {ext}.py\n'
-                      f'├  {e}')
-            else:
-                print(f'├ ✔ Loaded Plugin: {ext}')
-
-    # +------------------------------------------------------------+
-    # |    For the time being, Modbot works on single guild only   |
-    # +------------------------------------------------------------+
-    '''@property
-    def guild(self):
-        """ Guild monitored by Modbot """
-        return discord.utils.get(self.guilds)'''
 
     # +------------------------------------------------------------+
     # |            If everything went well...                      |
@@ -164,21 +98,6 @@ class ModBot(commands.Bot):
         await self.change_presence(status=discord.Status.online,
                                    activity=discord.Activity(type=discord.ActivityType.listening,
                                                              name=status))
-        '''msg = f'<:thonkingcool:540582184306606113> `Status set to:` Listening to **{status}** | `{self.ws.latency * 1000:.2f} ms`'
-        await self.get_channel(status_loop_channel).send(msg)
-        # ==================================================
-        #            Waking up message!
-        # ==================================================
-        result = datetime.now(timezone('Europe/London')).strftime(f'**%a** %d %b, **%H**:%M:%S')
-        txt = f'Websocket: `{self.ws.latency * 1000:.2f}` ms\n{result}'
-        try:
-            await self.get_channel(540600062217158666).send(txt)
-        except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-            gen_chan = os.environ.get('CHAN')
-            try:
-                await self.get_channel(gen_chan).send(txt)
-            except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                pass'''
 
     # +------------------------------------------------------------+
     # |                Cliché commands                             |
@@ -293,137 +212,6 @@ class ModBot(commands.Bot):
         except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
             return await ctx.send(z)
 
-    # +------------------------------------------------------------+
-    # |                Bot Owner commands!                         |
-    # +------------------------------------------------------------+
-    @commands.command(description='Command for bot owner', hidden=True, no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def restart(self, ctx):
-        """ ᗣ Restart Heroku """
-        if ctx.message.author.id in (dev[1] for dev in dev_list):
-            try:
-                await ctx.channel.trigger_typing()
-                await self.change_presence(status=discord.Status.offline)
-                await ctx.send('Restarting Heroku . . .')
-                self.session.close()
-                await self.logout()
-
-            except Exception as e:
-                if ctx.message.guild.id == 540072370527010841:
-                    tb = traceback.format_exc()
-                    await ctx.send(f'```py\n{e}\n!------------>\n{tb}```')
-                else:
-                    pass
-
-        else:
-            if random.randint(1, 3) != 1:
-                warn = '(ง •̀•́)ง fite me!'
-                return await ctx.channel.send(warn, delete_after=60)
-            else:
-                pass
-
-    @commands.command(description='Command for bot owner', no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def load(self, ctx, *, cog: str = None):
-        """ ᗣ Load a mod plugin """
-        if ctx.author.id not in (dev[1] for dev in dev_list):
-            return
-
-        else:
-            cog = f'cogs.{cog}'
-
-            if str is None:
-                try:
-                    await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                    return
-
-            if str is not None:
-                try:
-                    self.load_extension(cog)
-                    try:
-                        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        return await ctx.send(f'Loaded plugin **{cog}.py** successfully')
-
-                except Exception as e:
-                    if ctx.message.guild.id == 540072370527010841:
-                        await ctx.channel.trigger_typing()
-                        tb = traceback.format_exc()
-                        await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
-
-                    try:
-                        await ctx.message.add_reaction('\N{LARGE RED CIRCLE}')
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        pass
-
-    @commands.command(description='Command for bot owner', no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def reload(self, ctx, *, cog: str = None):
-        """ ᗣ Reload any mod plugin """
-        if ctx.author.id not in (dev[1] for dev in dev_list):
-            return
-
-        else:
-            if str is None:
-                try:
-                    return await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-
-                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                    msg = 'sorry m8, I cannot read your mind\nwhat plugin do u want to reload?'
-                    return await ctx.send(msg, delete_after=9)
-
-            if str is not None:
-                try:
-                    cog = f"cogs.{cog}"
-                    self.unload_extension(cog)
-                    self.load_extension(cog)
-
-                    try:
-                        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        msg = f'Successfully reloaded cogs/{cog}.py'
-                        return await ctx.send(msg, delete_after=9)
-
-                except Exception as e:
-                    if ctx.message.guild.id == 540072370527010841:
-                        await ctx.channel.trigger_typing()
-                        tb = traceback.format_exc()
-                        await ctx.send(f'```py\nError loading plugin: {cog}.py\n{e}\n!------------>\n{tb}```')
-
-                    try:
-                        await ctx.message.add_reaction('\N{LARGE RED CIRCLE}')
-
-                    except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                        pass
-
-    @commands.command(description='Command for bot owner', no_pm=True)
-    @commands.has_any_role('Admin', 'Mod', 'Moderator', 'Owner')
-    async def unload(self, ctx, *, cog: str = None):
-        """ ᗣ Unload any mod plugin """
-        if ctx.author.id not in (dev[1] for dev in dev_list):
-            return
-
-        else:
-            if str is None:
-                try:
-                    await ctx.message.add_reaction('\N{BLACK QUESTION MARK ORNAMENT}')
-
-                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                    msg = 'sorry m8, I cannot read your mind\nwhat plugin do u want to unload?'
-                    return await ctx.send(msg, delete_after=9)
-
-            if str is not None:
-                await ctx.channel.trigger_typing()
-                try:
-                    self.unload_extension(cog)
-                    await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
-
-                except discord.Forbidden:  # FORBIDDEN (status code: 403): Missing Permissions
-                    msg = f'Plugin **cogs/{cog}.py** unloaded'
-                    await ctx.send(msg, delete_after=9)
-    
 # +------------------------------------------------------------+
 # |             Here we get the bot's TOKEN                    |
 # +------------------------------------------------------------+
