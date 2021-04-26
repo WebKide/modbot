@@ -29,7 +29,7 @@ from pytz import timezone
 from discord.ext import commands
 from pathlib import Path
 
-__version__ = '0.06.8'  # first int is main, second is stable, third is working release [0.00.0]
+__version__ = '0.07.1'  # first int is main, second is stable, third is working release [0.00.0]
 dev_list = [
     ('WebKide', 323578534763298816),
     ('Ara', 324040201225633794)
