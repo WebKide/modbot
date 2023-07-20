@@ -1,5 +1,5 @@
 discord.py==1.7.1
-aiohttp==3.7.4
+aiohttp==3.8.5
 beautifulsoup4
 bs4
 chardet
