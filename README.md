@@ -6,16 +6,16 @@
 </div>
 
 <div align="center">
-<a href="https://heroku.com/deploy?template=https://github.com/WebKide/modbot">
-<img src="https://img.shields.io/badge/deploy_to-heroku-997FBC.svg?style=for-the-badge" alt="Heroku deploy" />
+<a href="https://github.com/WebKide/">
+<img src="https://img.shields.io/badge/Modmail%20Plugin-by%20WebKide-black.svg?style=popout&logo=github&logoColor=white" alt="WebKide" />
 </a>
 
 <a href="https://www.python.org/download/releases/3.0/">
-<img src="https://img.shields.io/badge/python-3.7-7289DA.svg?style=for-the-badge" alt="Python 3.7" />
+<img src="https://img.shields.io/badge/Made%20with-Python%203.10-blue.svg?style=popout&logo=python&logoColor=yellow" alt="Python3" />
 </a>
 
-<a href="https://github.com/kyb3r/modmail/">
-<img src="https://img.shields.io/github/forks/WebKide/modbot.svg?style=for-the-badge" alt="GitHub forks" />
+<a href="https://www.mongodb.com/cloud">
+<img src="https://img.shields.io/badge/Database-MongoDB-%234ea94b.svg?style=popout&logo=mongodb&logoColor=white" alt="MongoDB" />
 </a>
 </div>
 
