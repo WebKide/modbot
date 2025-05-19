@@ -1,6 +1,6 @@
 <div align="center">
 <p>
-<img src="https://i.imgur.com/tiwewHK.png" alt="modbot logo" />
+<img src="https://i.imgur.com/ZUxl2wl.png" alt="modbot logo" />
 </p>
 <p><b><i>a Moderation bot for your Discord server!</i> 「ReWrite」</b></p>
 </div>
@@ -23,7 +23,7 @@
 This modbot uses <b>discord.py</b> [rewrite 1.0.0a](http://discordpy.readthedocs.io/en/rewrite/) library for Discord bots.
 
 <div align="center">
-<a href="#">
+<a href="https://github.com/WebKide/modbot/">
 <img src="http://forthebadge.com/images/badges/built-with-love.svg?style=for-the-badge" alt="built with love" />
 </a>
 </div>
